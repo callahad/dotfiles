@@ -17,8 +17,12 @@
   hardware.sane.dsseries.enable = true;
 
   # Keyboard (Caps Lock is Control)
-  i18n.consoleUseXkbConfig = true;
+  console.useXkbConfig = true;
   services.xserver.xkbOptions = "ctrl:nocaps";
+
+  # Disable DNS extensions (DNSSEC, etc.)
+  # When enabled, DNS resolution breaks on some networks
+  networking.resolvconf.dnsExtensionMechanism = false;
 
   # Firewall
   networking.firewall.enable = true;
