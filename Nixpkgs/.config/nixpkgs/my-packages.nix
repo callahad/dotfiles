@@ -11,11 +11,6 @@ in
     desktop-icons = callPackage ./pkgs/gnomeExtensions/desktop-icons.nix { };
   };
 
-  # Build sxiv with a patched Imlib2 to support WebP images
-  sxiv = super.sxiv.override {
-    imlib2 = callPackage ./pkgs/imlib2_webp { };
-  };
-
   # sudo nix-channel --update; nix-env -ir my-env
   my-env = super.buildEnv {
     name = "my-env";
