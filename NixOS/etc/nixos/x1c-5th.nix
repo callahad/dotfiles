@@ -51,32 +51,7 @@
   # Kernel
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  # I need kernel 5.4.2 to get past a regression with i915:
-  #   https://bugs.freedesktop.org/show_bug.cgi?id=111805
-  # Linux 5.4.2 isn't in Nixpkgs yet:
-  #  https://github.com/NixOS/nixpkgs/pull/75144
-  # But that's OK, because we can manually define it here
-  boot.kernelPackages =
-    let
-      linux_5_4_pkg = { fetchurl, buildLinux, ... } @ args:
-        buildLinux (args // rec {
-          version = "5.4.2";
-          modDirVersion = version;
-
-          src = fetchurl {
-            url = "mirror://kernel/linux/kernel/v5.x/linux-${version}.tar.xz";
-            sha256 = "0mx50cp61kajya3lfcksw7wksq7ihkqzrzszf4bb19kwhxb85y9j";
-          };
-          kernelPatches = [];
-
-          extraMeta.branch = "5.4";
-        } // (args.argsOverride or {}));
-      linux_5_4 = pkgs.callPackage linux_5_4_pkg{};
-    in
-      pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor linux_5_4);
-
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [
     "i915.enable_fbc=1" # Save an infinitesimal amount of power by compressing the framebuffer
     "i915.fastboot=1"   # Avoid modesets until we're in a graphical environment
