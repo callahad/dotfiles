@@ -64,6 +64,9 @@ in
       syncthing
       xclip
       youtube-dl aria
+
+      # Games
+      steam-run
     ] ++ (with gnomeExtensions; [
       appindicator
       caffeine
