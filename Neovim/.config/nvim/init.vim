@@ -33,21 +33,6 @@ call plug#begin('~/.cache/nvim/plugged')
     Plug 'majutsushi/tagbar'
         map <leader>t :TagbarToggle<CR>
 
-    " Plug 'neomake/neomake'
-    "     " No auto-make until https://github.com/neomake/neomake/issues/1216
-    "     " au BufWritePost * Neomake
-    "     let g:neomake_open_list = 2
-    "     let g:neomake_list_height = 7
-    "     let g:neomake_error_sign = {'text': '✖', 'texthl': 'ErrorMsg'}
-    "     let g:neomake_warning_sign = {'text': '❢', 'texthl': 'WarningMsg'}
-    "     let g:neomake_message_sign = {'text': '➤', 'texthl': 'MoreMsg'}
-    "     let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'ModeMsg'}
-
-    "     let g:neomake_python_pylama_args = ["--linters", "pyflakes,pep8,pydocstyle,mccabe", "--ignore", "D213"]
-    "     let g:neomake_sh_shellcheck_args = ["-f", "gcc", "-x"]
-    "     let g:neomake_clippy_clippy_exe = 'clippy'
-    "     let g:neomake_clippy_clippy_args = ['+nightly', 'clippy', '--message-format=json', '--quiet', '--', '-W', 'clippy-pedantic']
-
     " File Types
     " See sheerun/vim-polyglot for more suggestions
     Plug 'cespare/vim-toml'
@@ -89,39 +74,7 @@ call plug#begin('~/.cache/nvim/plugged')
         nnoremap <leader>u :MundoToggle<CR>
     Plug 'junegunn/goyo.vim'
     Plug 'chaimleib/vim-renpy'
-
-    " -- Completion --
-
-    " Popular LSP plugins: LanguageClient-neovim, vim-lsp, and vim-lsc
-    " Of those, LanguageClient-neovim seems to be the most mature
-
-    "Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-    "    let g:LanguageClient_diagnosticsDisplay = {
-    "        \ '1': { 'name': 'Error', 'texthl': 'ErrorMsg', 'signText': '✖', 'signTexthl': 'ErrorMsg'},
-    "        \ '2': { 'name': 'Warning', 'texthl': 'WarningMsg', 'signText': '❢', 'signTexthl': 'WarningMsg'},
-    "        \ '3': { 'name': 'Information', 'texthl': 'ModeMsg', 'signText': 'ℹ', 'signTexthl': 'ModeMsg'},
-    "        \ '4': { 'name': 'Hint', 'texthl': 'MoreMsg', 'signText': '➤', 'signTexthl': 'MoreMsg'},
-    "        \ }
-    "    let g:LanguageClient_serverCommands = {
-    "        \ 'rust': ['rls', '+nightly'],
-    "        \ }
-
-    "    au FileType rust setlocal formatexpr=LanguageClient_textDocument_rangeFormatting()
-    "    nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-    "    nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-    "    nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
-    " LanguageClient-neovim automagically integrates with NCM and Deoplete
-    " NCM seems to work better out-of-the-box, but only supports neovim
-
-    if has('nvim')
-        "Plug 'roxma/nvim-completion-manager'
-    endif
-
-    " Plug 'Shougo/denite.nvim'
-    " Plug 'Shougo/neosnippet.vim'
-    " Plug 'Shougo/neosnippet-snippets'
-    " Plug 'honza/vim-snippets'
+    Plug 'powerman/vim-plugin-ansiesc'
 
     " -- File / Filename Searching --
 
@@ -142,15 +95,6 @@ call plug#begin('~/.cache/nvim/plugged')
     "Plug 'tpope/vim-fugitive'
     "Plug 'gregsexton/gitv'
     "Plug 'airblade/vim-gitgutter'
-
-    " -- Wiki / Taskwarrior Integration --
-
-    " Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
-    "     let g:vimwiki_auto_chdir = 1
-    " Plug 'tbabej/taskwiki'
-    "     let g:taskwiki_disable_concealcursor = 'yes'
-    " Plug 'powerman/vim-plugin-AnsiEsc'
-    " Plug 'blindFS/vim-taskwarrior'
 
 call plug#end()
 

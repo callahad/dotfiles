@@ -1,3 +1,9 @@
+# Set up Nix
+fenv source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+
+# Stay in Fish after calling `nix-shell` or `nix run`
+any-nix-shell fish --info-right | source
+
 if type -q nvim
     set -x EDITOR "nvim"
 else

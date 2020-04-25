@@ -31,7 +31,7 @@ function fish_prompt
     if test "$fish_key_bindings" = "fish_vi_key_bindings"
       switch $fish_bind_mode
         case default
-          segment white red ""
+          segment red white ""
         case insert
           segment $base_color ""
         case replace-one
@@ -73,12 +73,12 @@ function fish_prompt
         end
 
         set -l prompt
-        set -l git_ahead (git_ahead "+ " "- " "± ")
+        set -l git_ahead (git_ahead "+" "-" "±")
 
         if test "$branch_name" = master
-            set prompt " $git_glyph $git_ahead"
+            set prompt "$git_glyph $git_ahead"
         else
-            set prompt " $git_glyph $branch_name $git_ahead"
+            set prompt " $git_glyph $branch_name $git_ahead "
         end
 
         if set -q git_color[3]
