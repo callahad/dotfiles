@@ -11,6 +11,12 @@ in
     desktop-icons = callPackage ./pkgs/gnomeExtensions/desktop-icons.nix { };
   };
 
+  ranger = super.ranger.overrideAttrs(oldAttrs: {
+    patches = (oldAttrs.patches or []) ++ [
+      ./pkgs/ranger.patch
+    ];
+  });
+
   # sudo nix-channel --update; nix-env -ir my-env
   my-env = super.buildEnv {
     name = "my-env";
