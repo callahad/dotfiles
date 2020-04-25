@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   name = "gnome-shell-extension-syncthing-${version}";
-  version = "2019-10-25";
+  version = "2020-04-03";
 
   src = fetchFromGitHub {
     owner = "jaystrictor";
     repo = "gnome-shell-extension-syncthing";
-    rev = "9ba7376028e7c269ddef18c81f44adadfe477a7e";
-    sha256 = "042jsyc554rbn0rvbp3syw51cz90rqjhqp4q61cyzsff8zj9l7ky";
+    rev = "3d4a50fe1c7262af6dd8ba1920963289e4b29e71";
+    sha256 = "0zyyxdg0jw308hdi6xsjks17z6xxayw9k2i8l9lwwy97mhk7jmlh";
   };
 
   nativeBuildInputs = [ glib zip unzip ];
