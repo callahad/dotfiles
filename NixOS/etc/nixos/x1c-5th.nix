@@ -33,7 +33,6 @@
   #   https://github.com/NixOS/nixos-hardware/blob/master/common/cpu/intel/default.nix
   hardware.enableRedistributableFirmware = true;
   hardware.cpu.intel.updateMicrocode = true;
-  hardware.opengl.s3tcSupport = true;
   hardware.opengl.extraPackages = with pkgs; [ vaapiIntel vaapiVdpau libvdpau-va-gl intel-media-driver ];
   services.xserver.useGlamor = true;
 

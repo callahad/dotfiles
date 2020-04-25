@@ -15,7 +15,7 @@
     gnome-maps
     gnome-music
     gnome-photos
-    vino
+    gnome-remote-desktop
   ];
 
   # ...Add GNOME packages I do want
