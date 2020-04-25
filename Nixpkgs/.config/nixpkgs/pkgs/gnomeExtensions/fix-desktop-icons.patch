@@ -1,7 +1,16 @@
 diff --git a/prefs.js b/prefs.js
-index 4b8d986..2297c01 100644
+index 66382f7..4e0c1b0 100644
 --- a/prefs.js
 +++ b/prefs.js
+@@ -59,7 +59,7 @@ function initTranslations() {
+ }
+ 
+ function init() {
+-    let schemaSource = GioSSS.get_default();
++    let schemaSource = GioSSS.new_from_directory("@gschemasDirNautilus@", GioSSS.get_default(), true);
+     let schemaGtk = schemaSource.lookup(SCHEMA_GTK, true);
+     gtkSettings = new Gio.Settings({ settings_schema: schemaGtk });
+     let schemaObj = schemaSource.lookup(SCHEMA_NAUTILUS, true);
 @@ -76,17 +76,7 @@ function init() {
  function get_schema(schema) {
      let extension = ExtensionUtils.getCurrentExtension();

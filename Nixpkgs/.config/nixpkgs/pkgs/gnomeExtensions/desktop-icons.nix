@@ -1,18 +1,19 @@
-{ stdenv, fetchFromGitLab, meson, ninja, python3, glib }:
+{ stdenv, fetchFromGitLab, meson, ninja, python3, glib, gnome3 }:
 
 stdenv.mkDerivation rec {
   name = "gnome-shell-extension-desktop-icons-${version}";
-  version = "19.10.2";
+  version = "20.04.0";
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
     owner = "World%2FShellExtensions";
     repo = "desktop-icons";
-    rev = "19.10.2";
-    sha256 = "05iylydryfq61kr1zkdaz9bw0q6fm227liabz0xdfcb0iq8bxfa2";
+    rev = "${version}";
+    sha256 = "0502g9fwl23mzb636y29jd57j3wmpmhj5m04bn6zm134y65yk8qn";
   };
 
   nativeBuildInputs = [ meson ninja python3 glib ];
+  buildInputs = [ gnome3.nautilus ];
 
   prePatch = ''
     chmod +x meson_post_install.py
@@ -25,7 +26,8 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     substituteInPlace prefs.js \
-      --subst-var-by gschemasDir "${placeholder "out"}/share/gsettings-schemas/${name}/glib-2.0/schemas"
+      --subst-var-by gschemasDir "${placeholder "out"}/share/gsettings-schemas/${name}/glib-2.0/schemas" \
+      --subst-var-by gschemasDirNautilus "${gnome3.nautilus}/share/gsettings-schemas/${gnome3.nautilus.name}/glib-2.0/schemas"
   '';
 
   meta = with stdenv.lib; {
