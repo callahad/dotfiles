@@ -1,5 +1,7 @@
-# Set up Nix
-fenv source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+# Set up Nix on macOS
+if [ -f '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]
+    fenv source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+end
 
 # Stay in Fish after calling `nix-shell` or `nix run`
 any-nix-shell fish --info-right | source
