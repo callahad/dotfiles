@@ -29,6 +29,7 @@ in
       flameshot
       gimp
       google-chrome
+      imv
       inkscape
       keepassxc
       kitty
@@ -37,14 +38,12 @@ in
       mpv
       nextcloud-client
       peek
-      # quodlibet-full # Fails to build, https://github.com/NixOS/nixpkgs/issues/53938
+      quodlibet-full
       rapid-photo-downloader
       scribus
       simple-scan
-      sxiv
       typora
       vlc
-      zoom-us
 
       # Development
       devd
@@ -59,8 +58,10 @@ in
 
       # Console Utilities
       cmus
-      ffmpeg
+      dua
+      ffmpeg-full
       highlight
+      ncdu
       oathToolkit
       pdftk
       qpdf
