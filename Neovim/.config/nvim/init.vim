@@ -1,4 +1,21 @@
-set nocompatible " (Neovim Default)
+" Reconcile Vim 8 and Neovim defaults
+if !has("nvim")
+    unlet! skip_defaults_vim
+    source $VIMRUNTIME/defaults.vim
+    set hlsearch
+    set smarttab
+    if filereadable($VIMRUNTIME . "/macros/matchit.vim")
+        source $VIMRUNTIME/macros/matchit.vim
+    endif
+else
+    set mouse=a
+endif
+
+" Neovim-specific Options
+if has("nvim")
+    set clipboard=unnamedplus
+    set inccommand=nosplit
+endif
 
 " Vim-Plug Setup
 call plug#begin('~/.cache/nvim/plugged')
@@ -99,31 +116,19 @@ call plug#begin('~/.cache/nvim/plugged')
 call plug#end()
 
 " Appearance
-syntax on " (Neovim Default)
 set background=dark
 colorscheme lucius
-set ruler
 set colorcolumn=81
 set nofoldenable
-set showcmd
-set ttyfast " (Neovim Default)
 set listchars=trail:·,precedes:«,extends:»,nbsp:_,tab:▸· " More: ⌇ ► ▸ ❯ ⇥
 set list
 
 " Searching
-set hlsearch " (Neovim Default)
-set incsearch " (Neovim Default)
 set ignorecase
 set smartcase
 
 " Behavior
-if filereadable($VIMRUNTIME . "/macros/matchit.vim")
-    source $VIMRUNTIME/macros/matchit.vim
-endif
-set backspace=indent,eol,start " (Neovim Default)
-set mouse=a "Enables the mouse in terminals (Neovim Default)
 set completeopt+=longest
-set clipboard=unnamedplus
 set wildmode=longest:full,full
 
 " Editing Defaults
@@ -131,7 +136,6 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set textwidth=80
-set smarttab " (Neovim Default)
 set expandtab
 set copyindent
 set smartindent
