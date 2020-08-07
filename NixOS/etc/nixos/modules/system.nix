@@ -8,7 +8,6 @@
   services.fwupd.enable = true;
   services.pcscd.enable = true;
   sound.enable = true;
-  hardware.u2f.enable = true;
 
   # Printing / Scanning
   services.printing.enable = true;
