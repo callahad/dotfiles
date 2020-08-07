@@ -46,11 +46,8 @@
     ripgrep
 
     # Archives
-    atool
-    p7zip
-    unrar
-    unzip
-    zip
+    libarchive # bsdtar
+    unar
 
     # Backup
     borgbackup
