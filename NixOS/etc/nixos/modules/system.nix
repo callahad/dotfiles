@@ -15,6 +15,13 @@
   hardware.sane.enable = true;
   hardware.sane.dsseries.enable = true;
 
+  # Bluetooth Audio (including AptX and other codecs)
+  hardware.pulseaudio = {
+    enable = true;
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
+    package = pkgs.pulseaudioFull;
+  };
+
   # Keyboard (Caps Lock is Control)
   console.useXkbConfig = true;
   services.xserver.xkbOptions = "ctrl:nocaps";
