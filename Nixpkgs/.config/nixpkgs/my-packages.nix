@@ -11,6 +11,8 @@ in
     desktop-icons = callPackage ./pkgs/gnomeExtensions/desktop-icons.nix { };
   };
 
+  hunter = callPackage ./pkgs/hunter.nix { };
+
   ranger = super.ranger.overrideAttrs(oldAttrs: {
     patches = (oldAttrs.patches or []) ++ [
       ./pkgs/ranger.patch
