@@ -2,6 +2,8 @@
     name = Dan Callahan
     email = dan.callahan@gmail.com
     signingKey = 7AA5DAD1C95640B8DE88D4AF8D6DD713E9EBA7FD
+[init]
+    defaultBranch = main
 [alias]
     ci = commit
     st = status
