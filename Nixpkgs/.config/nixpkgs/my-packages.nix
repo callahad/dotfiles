@@ -29,7 +29,6 @@ in
       flameshot
       gimp
       google-chrome
-      imv
       inkscape
       keepassxc
       kitty
@@ -38,11 +37,11 @@ in
       mpv
       nextcloud-client
       peek
-      quodlibet-full
+      # quodlibet-full # Broken :(
       rapid-photo-downloader
       scribus
       simple-scan
-      typora
+      sxiv
       vlc
 
       # Development
@@ -71,9 +70,6 @@ in
       syncthing
       xclip
       youtube-dl aria
-
-      # Games
-      steam-run
     ] ++ (with gnomeExtensions; [
       appindicator
       caffeine
