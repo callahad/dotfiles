@@ -7,6 +7,13 @@
   nixpkgs.config.packageOverrides = pkgs: {
     # Alias vi and vim to neovim
     neovim = pkgs.neovim.override { vimAlias = true; viAlias = true; };
+
+    # Temporary hack to work around https://github.com/fish-shell/fish-shell/issues/6994
+    fish = pkgs.fish.overrideAttrs(oldAttrs: {
+      patches = (oldAttrs.patches or []) ++ [
+        ./fish-kitty-images.patch
+      ];
+    });
   };
 
   # Software
