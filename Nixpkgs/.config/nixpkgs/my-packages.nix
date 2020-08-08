@@ -1,7 +1,7 @@
 self: super:
 
 let
-  inherit (super) callPackage fetchurl fetchFromGitHub;
+  inherit (super) callPackage fetchurl fetchFromGitHub libsForQt5;
 in
 
 {
@@ -16,6 +16,8 @@ in
       ./pkgs/ranger.patch
     ];
   });
+
+  noson = libsForQt5.callPackage ./pkgs/noson.nix { };
 
   # sudo nix-channel --update; nix-env -ir my-env
   my-env = super.buildEnv {
@@ -35,6 +37,7 @@ in
       latest.firefox-nightly-bin
       libreoffice-fresh
       mpv
+      noson
       nextcloud-client
       peek
       # quodlibet-full # Broken :(
