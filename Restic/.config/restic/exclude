@@ -1,6 +1,7 @@
 # Caches and trash
 .cache/
 .local/share/Trash/
+.local/share/Steam/
 .thumbnails/
 
 # SCMs I don't directly interact with
@@ -34,6 +35,7 @@
 .pylint.d/
 .sane/
 .snes9x/
+.steam/
 .texlive2014/
 .w3m/
 .yEd/
