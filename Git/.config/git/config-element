@@ -1,0 +1,5 @@
+[user]
+    email = danc@element.io
+    signingKey = BE5B1BD39BC2BB9AEEC3DAA05FAD56482D9EB851
+[alias]
+    ci = commit -s

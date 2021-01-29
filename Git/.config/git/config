@@ -23,3 +23,5 @@
     program = gpg2
 [merge]
     conflictstyle = diff3
+[includeIf "gitdir:~/Projects/Element/"]
+    path = ~/.config/git/config-element
