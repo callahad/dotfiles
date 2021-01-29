@@ -22,6 +22,12 @@
     package = pkgs.pulseaudioFull;
   };
 
+  # Logitech Wireless Mouse
+  hardware.logitech.wireless = {
+    enable = true;
+    enableGraphical = true;
+  };
+
   # Keyboard (Caps Lock is Control)
   console.useXkbConfig = true;
   services.xserver.xkbOptions = "ctrl:nocaps";
