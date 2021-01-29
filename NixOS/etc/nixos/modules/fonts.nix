@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  fonts.enableFontDir = true;
+  fonts.fontDir.enable = true;
 
   fonts.fontconfig.allowBitmaps = false;
 
