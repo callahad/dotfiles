@@ -11,7 +11,7 @@
 
   # Printing / Scanning
   services.printing.enable = true;
-  services.printing.drivers = [ pkgs.brgenml1cupswrapper ];
+  services.printing.drivers = [ pkgs.brlaser ];
   hardware.sane.enable = true;
   hardware.sane.dsseries.enable = true;
 
