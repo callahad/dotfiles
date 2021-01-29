@@ -29,7 +29,7 @@ in
       calibre
       celluloid
       deluge
-      digikam breeze-icons # qt5.qtwayland
+      digikam
       flameshot
       gimp
       google-chrome
