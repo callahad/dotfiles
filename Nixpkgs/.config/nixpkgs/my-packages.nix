@@ -36,7 +36,7 @@ in
       inkscape
       keepassxc
       kitty
-      latest.firefox-nightly-bin
+      latest.firefox-beta-bin
       libreoffice-fresh
       mpv
       noson
