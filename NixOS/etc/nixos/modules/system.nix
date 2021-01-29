@@ -37,28 +37,5 @@
   networking.resolvconf.dnsExtensionMechanism = false;
 
   # Firewall
-  networking.firewall.enable = true;
-
-  networking.firewall.allowedTCPPorts = [
-    8010  # VLC -> Chromecast streaming
-    #3400 3401 3500  # Noson (SONOS Controller)
-  ];
-
-  networking.firewall.allowedTCPPortRanges = [
-    { from = 1400; to = 1410; }  # Noson (SONOS Controller)
-  ];
-
-  networking.firewall.allowedUDPPorts = [
-    #1900 1901  # Noson (SONOS Controller)
-  ];
-
-  networking.firewall.allowedUDPPortRanges = [
-    { from = 32768; to = 60999; }  # Ephemeral ports (also needed by Noson)
-  ];
-
-  # MDN Development
-  networking.hosts = {
-    "127.0.0.1" = ["mdn.localhost" "beta.mdn.localhost" "wiki.mdn.localhost"];
-    "::1" = ["mdn.localhost" "beta.mdn.localhost" "wiki.mdn.localhost"];
-  };
+  networking.firewall.enable = false;
 }
