@@ -31,24 +31,12 @@ set -x HISTFILE "$HOME/.local/share/bash/history"
 
 # Prevent Wine from generating file associations, desktop links, etc.
 set -x WINEDLLOVERRIDES "winemenubuilder.exe=d"
-set -x WINEARCH win32
-
 
 # Ruby / Other Local Binaries
 fish_add_path "$HOME/bin"
 fish_add_path "$HOME/.local/bin"
 
 # Rust / Cargo
-# Use OpenSSL headers from Homebrew on macOS. Necessary for compiling Servo:
-# https://github.com/sfackler/rust-openssl/issues/255
-# https://github.com/servo/servo/issues/7930
-if test (uname -s) = 'Darwin'; and type -q brew
-    set -l base (brew --prefix openssl)
-    if test -d $base
-        set -x DEP_OPENSSL_INCLUDE "$base/include"
-        set -x OPENSSL_INCLUDE_DIR "$base/include"
-    end
-end
 fish_add_path "$HOME/.cargo/bin"
 
 # Prompt customization
