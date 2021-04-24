@@ -1,10 +1,14 @@
 # Set up Nix on macOS
 if [ -f '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]
     fenv source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+else if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]
+    fenv source "$HOME/.nix-profile/etc/profile.d/nix.sh"
 end
 
 # Stay in Fish after calling `nix-shell` or `nix run`
-any-nix-shell fish --info-right | source
+if command -v any-nix-shell > /dev/null
+    any-nix-shell fish --info-right | source
+end
 
 if type -q nvim
     set -x EDITOR "nvim"
@@ -31,6 +35,10 @@ set -x HISTFILE "$HOME/.local/share/bash/history"
 
 # Prevent Wine from generating file associations, desktop links, etc.
 set -x WINEDLLOVERRIDES "winemenubuilder.exe=d"
+
+# MacPorts
+fish_add_path "/opt/local/bin"
+fish_add_path "/opt/local/sbin"
 
 # Ruby / Other Local Binaries
 fish_add_path "$HOME/bin"
