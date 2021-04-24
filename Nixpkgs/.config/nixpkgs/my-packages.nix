@@ -50,6 +50,7 @@ in
       vlc
 
       # Development
+      delta
       devd
       docker_compose
       emacs
