@@ -19,6 +19,10 @@
     verbose = true
 [gpg]
     program = gpg2
+[pull]
+    ff = only
+[fetch]
+    prune = true
 [merge]
     conflictstyle = diff3
 [includeIf "gitdir:~/Projects/Element/"]
