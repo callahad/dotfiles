@@ -7,6 +7,6 @@ index 1ae1261..8d9cf46 100644
  
 +imports.gi.GIRepository.Repository.prepend_search_path('@webkitPath@');
 +
+ imports.gi.versions.Gtk = '3.0';
+ imports.gi.versions.WebKit2 = '4.0';
  const Gio = imports.gi.Gio;
- const Gtk = imports.gi.Gtk;
- const Lang = imports.lang;

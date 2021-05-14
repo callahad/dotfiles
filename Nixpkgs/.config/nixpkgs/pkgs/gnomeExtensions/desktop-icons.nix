@@ -2,14 +2,14 @@
 
 stdenv.mkDerivation rec {
   name = "gnome-shell-extension-desktop-icons-${version}";
-  version = "20.04.0";
+  version = "20.10.0";
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
     owner = "World%2FShellExtensions";
     repo = "desktop-icons";
     rev = "${version}";
-    sha256 = "0502g9fwl23mzb636y29jd57j3wmpmhj5m04bn6zm134y65yk8qn";
+    sha256 = "02in0dcjjpf6fvi87xxdbhv36ghsgy7ii4sd00hcxjvzr683mixi";
   };
 
   nativeBuildInputs = [ meson ninja python3 glib ];
