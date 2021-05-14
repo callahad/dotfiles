@@ -1,7 +1,18 @@
 local wezterm = require 'wezterm';
+
+if wezterm.target_triple:find("darwin") then
+    -- macOS
+    font_size = 13.0;
+    window_decorations = "TITLE | RESIZE";
+else
+    -- Linux
+    font_size = 10.5;
+    window_decorations = "RESIZE";
+end
+
 return {
   font = wezterm.font("Iosevka Term"),
-  font_size = 13,
+  font_size = font_size,
   harfbuzz_features = {"calt=0", "JSPT=1"},
 
   font_rules = {
@@ -11,10 +22,9 @@ return {
     }
   },
 
-  -- check_for_updates = false,
-
-  enable_wayland = true,
   native_macos_fullscreen_mode = true,
+  window_decorations = window_decorations,
+
   term = "wezterm",
 
   -- Decent color schemes:
