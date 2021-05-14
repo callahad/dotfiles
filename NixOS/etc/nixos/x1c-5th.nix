@@ -25,7 +25,7 @@
   system.autoUpgrade.enable = true;
 
   # Power Management
-  services.tlp.enable = true;
+  #services.tlp.enable = true;
   services.thermald.enable = true;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 
