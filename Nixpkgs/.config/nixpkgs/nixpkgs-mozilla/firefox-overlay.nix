@@ -1,16 +1,13 @@
 # This file provide the latest binary versions of Firefox published by Mozilla.
 self: super:
 
-# firefox.key file was downloaded from:
-#   https://gpg.mozilla.org/pks/lookup?search=Mozilla+Software+Releases+%3Crelease%40mozilla.com%3E&op=get
-#
-# Now, the KEY file is stored next to the published version, such as:
-#   https://archive.mozilla.org/pub/firefox/releases/66.0.2/KEY
-#
-# Any time there are changes, this file should be copied by the manager of the firefox-overlay and move
-# in this repository under the name firefox.key.
-
 let
+  # This URL needs to be updated about every 2 years when the subkey is rotated.
+  pgpKey = super.fetchurl {
+    url = "https://download.cdn.mozilla.net/pub/firefox/candidates/89.0-candidates/build2/KEY";
+    sha256 = "1zm3cq854v4aabzzginmjxdm4gidcf5b522h58272fb0x4z3nimw";
+  };
+
   # This file is currently maintained manually, if this Nix expression attempt
   # to download the wrong version, this is likely to be the problem.
   #
@@ -45,7 +42,8 @@ let
 
   # The timestamp argument is a yyyy-mm-dd-hh-mm-ss date, which corresponds to
   # one specific version. This is used mostly for bisecting.
-  versionInfo = { name, version, release, system ? arch, timestamp ? null }: with builtins;
+  versionInfo = { name, version, release, system ? arch, timestamp ? null, info ? null }: with builtins;
+    if (info != null) then info else
     if release then
       # For versions such as Beta & Release:
       # https://download.cdn.mozilla.net/pub/firefox/releases/55.0b3/SHA256SUMS
@@ -96,7 +94,7 @@ let
     } ''
       HOME=`mktemp -d`
       set -eu
-      cat ${./firefox.key} | gpg --import
+      gpg --import < ${pgpKey}
       gpgv --keyring=$HOME/.gnupg/pubring.kbx $ASC $FILE
       mkdir $out
     '';
@@ -131,7 +129,7 @@ let
           HOME=`mktemp -d`
           set -eu
           export PATH="$PATH:${self.gnupg}/bin/"
-          cat ${./firefox.key} | gpg --import
+          gpg --import < ${pgpKey}
           gpgv --keyring=$HOME/.gnupg/pubring.kbx ${asc} $out
         '';
       };
@@ -156,7 +154,7 @@ in
 {
   lib = super.lib // {
     firefoxOverlay = {
-      inherit firefoxVersion;
+      inherit pgpKey firefoxVersion versionInfo firefox_versions;
     };
   };
 
@@ -188,8 +186,8 @@ in
   # Set of packages which used to build developer environment
   devEnv = (super.shell or {}) // {
     gecko = super.callPackage ./pkgs/gecko {
-      inherit (self.python35Packages) setuptools;
-      pythonFull = self.python35Full;
+      inherit (self.python36Packages) setuptools;
+      pythonFull = self.python36Full;
       nodejs =
         if builtins.compareVersions self.nodejs.name "nodejs-8.11.3" < 0
         then self.nodejs-8_x else self.nodejs;
