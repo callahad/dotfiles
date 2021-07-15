@@ -11,8 +11,6 @@ in
     desktop-icons = callPackage ./pkgs/gnomeExtensions/desktop-icons.nix { };
   };
 
-  hunter = callPackage ./pkgs/hunter.nix { };
-
   ranger = super.ranger.overrideAttrs(oldAttrs: {
     patches = (oldAttrs.patches or []) ++ [
       ./pkgs/ranger.patch
@@ -45,7 +43,7 @@ in
       wezterm
       # quodlibet-full # Broken :(
       rapid-photo-downloader
-      scribus
+      #scribus
       simple-scan
       sxiv
       vlc

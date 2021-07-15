@@ -1,4 +1,4 @@
-{ stdenv, mkDerivation, fetchFromGitHub, cmake
+{ stdenv, lib, mkDerivation, fetchFromGitHub, cmake
 , libpulseaudio
 , flac
 , qtgraphicaleffects
@@ -36,7 +36,7 @@ mkDerivation rec {
     wrapQtApp "$out/lib/noson/noson-gui"
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "SONOS controller for Linux";
     homepage = "https://janbar.github.io/noson-app/";
     license = [ licenses.gpl3Plus ];

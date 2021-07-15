@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, glib, zip, unzip, gnome3, systemd, webkitgtk }:
+{ stdenv, lib, fetchFromGitHub, glib, zip, unzip, gnome3, systemd, webkitgtk }:
 
 stdenv.mkDerivation rec {
   name = "gnome-shell-extension-syncthing-${version}";
@@ -36,7 +36,7 @@ stdenv.mkDerivation rec {
     ./install.sh
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Display SyncThing status icon in top bar";
     license = licenses.gpl3;
     maintainers = with maintainers; [ callahad ];
