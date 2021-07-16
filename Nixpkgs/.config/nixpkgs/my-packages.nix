@@ -40,9 +40,8 @@ in
       noson
       nextcloud-client
       peek
-      # quodlibet-full # Broken :(
+      quodlibet-full
       rapid-photo-downloader
-      #scribus
       simple-scan
       sxiv
       vlc
@@ -60,7 +59,6 @@ in
       mercurial
 
       # Console Utilities
-      cmus
       dua
       ffmpeg-full
       highlight
