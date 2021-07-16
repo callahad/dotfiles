@@ -40,7 +40,6 @@ in
       noson
       nextcloud-client
       peek
-      wezterm
       # quodlibet-full # Broken :(
       rapid-photo-downloader
       #scribus
