@@ -10,13 +10,12 @@
   # ...Remove GNOME packages I don't want
   environment.gnome.excludePackages = with pkgs.gnome; [
     epiphany
-    geary
     gnome-logs
     gnome-maps
     gnome-music
     gnome-photos
-    gnome-remote-desktop
   ];
+  programs.geary.enable = false;
 
   # ...Add GNOME packages I do want
   environment.systemPackages = with pkgs.gnome; [
