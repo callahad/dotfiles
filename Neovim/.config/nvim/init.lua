@@ -43,3 +43,29 @@ opt.wildmode = { 'longest:full', 'full' }
 -- Work around this by directly overwriting the original file when saving.
 -- https://vi.stackexchange.com/questions/25030/
 opt.backupcopy = 'yes'
+
+--[[ Plugins ]]
+-- Bootstrap Packer
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+end
+
+-- Install Plugins
+require('packer').startup(function(use)
+    -- Prevent Packer from uninstalling itself
+    use 'wbthomason/packer.nvim'
+
+    -- Colorschemes
+    use 'deu/vim-xoria256mod'
+
+    -- Editing
+    use 'editorconfig/editorconfig-vim'
+
+    -- Sync plugins if Packer was just installed for the first time
+    if packer_bootstrap then
+        require('packer').sync()
+    end
+end)
+
+cmd('colorscheme xoria256mod')
