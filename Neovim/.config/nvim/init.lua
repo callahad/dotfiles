@@ -65,6 +65,18 @@ require('packer').startup(function(use)
     use 'tpope/vim-surround'
     use 'tpope/vim-unimpaired'
 
+    -- Tree Sitter
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+        config = function()
+            require('nvim-treesitter.configs').setup {
+                ensure_installed = 'maintained',
+                highlight = { enable = true },
+            }
+        end,
+    }
+
     -- Sync plugins if Packer was just installed for the first time
     if packer_bootstrap then
         require('packer').sync()
