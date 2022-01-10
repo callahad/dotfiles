@@ -61,6 +61,9 @@ require('packer').startup(function(use)
 
     -- Editing
     use 'editorconfig/editorconfig-vim'
+    use 'tpope/vim-repeat'
+    use 'tpope/vim-surround'
+    use 'tpope/vim-unimpaired'
 
     -- Sync plugins if Packer was just installed for the first time
     if packer_bootstrap then
