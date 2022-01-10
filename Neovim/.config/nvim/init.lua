@@ -10,7 +10,6 @@ opt.clipboard = 'unnamedplus' -- Use the system clipboard automatically
 opt.colorcolumn = '81'
 opt.list = true
 opt.listchars = {
-    -- ⌇ ► ▸ ❯ · ⇥
     trail = '·',
     precedes = '«',
     extends = '»',
@@ -30,10 +29,14 @@ cmd('cnoremap %s/ %s/\\v')
 
 --[[ Editing ]]
 opt.tabstop = 4
-opt.shiftwidth = 0 -- follow opt.tabstop
+opt.shiftwidth = 0 -- Follows opt.tabstop
 opt.textwidth = 80
 opt.expandtab = true
 opt.copyindent = true
+
+--[[ Behavior ]]
+opt.completeopt:append('longest')
+opt.wildmode = { 'longest:full', 'full' }
 
 --[[ Quirks ]]
 -- File watchers like inotify can lose track of files modified by Vim.
