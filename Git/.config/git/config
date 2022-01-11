@@ -32,11 +32,17 @@
 [interactive]
     diffFilter = delta --color-only
 [delta]
-    file-style = omit
-    hunk-header-style = file line-number italic auto
-    hunk-header-file-style = bold italic yellow
-    hunk-header-line-number-style = bold italic yellow
-    hunk-header-decoration-style = yellow box
+    file-style = bold yellow
+    file-decoration-style = yellow box
+
+    hunk-header-style = file line-number italic
+    hunk-header-file-style = italic yellow ul
+    hunk-header-line-number-style = italic yellow
+    hunk-header-decoration-style = 
+
+    line-numbers = true
+    line-numbers-left-format =
+    line-numbers-right-style = yellow
 
 # Dayjob config
 [includeIf "gitdir:~/Projects/Element/"]
