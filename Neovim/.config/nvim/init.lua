@@ -65,7 +65,14 @@ require('packer').startup(function(use)
     use 'tpope/vim-surround'
     use 'tpope/vim-unimpaired'
 
-    -- Tree Sitter
+    -- Gitsigns: Slightly cleaner alternative to gitgutter
+    use {
+        'lewis6991/gitsigns.nvim',
+         requires = 'nvim-lua/plenary.nvim',
+         config = function() require('gitsigns').setup() end
+    }
+
+    -- Tree Sitter: Fault-tolerant parser / syntax highlighter
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
@@ -74,7 +81,22 @@ require('packer').startup(function(use)
                 ensure_installed = 'maintained',
                 highlight = { enable = true },
             }
-        end,
+        end
+    }
+
+    -- Telescope: Fuzzy find everything
+    use {
+        'nvim-telescope/telescope.nvim',
+         requires = {
+             'nvim-lua/plenary.nvim',
+             { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+         },
+         config = function()
+             require('telescope').load_extension('fzf')
+             vim.cmd[[
+                nnoremap <C-p> <cmd>Telescope find_files<cr>
+             ]]
+         end
     }
 
     -- Sync plugins if Packer was just installed for the first time
