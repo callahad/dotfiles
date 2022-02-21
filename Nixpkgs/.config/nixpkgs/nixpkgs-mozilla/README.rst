@@ -9,7 +9,6 @@ Current packages
 
 - gecko (https://github.com/mozilla/gecko-dev)
 - firefox-bin variants including Nightly
-- VidyoDesktop ()
 
 firefox-bin variants
 --------------------
@@ -70,6 +69,33 @@ Example of using in ```shell.nix```:
        (nixpkgs.rustChannelOf { rustToolchain = ./rust-toolchain; }).rust
      ];
    }
+
+Flake usage
+-----------
+This repository contains a minimal flake interface for the various
+overlays in this repository. To use it in your own flake, add it as
+an input to your ``flake.nix``:
+
+.. code:: nix
+ {
+   inputs.nixpkgs.url = github:NixOS/nixpkgs;
+   inputs.nixpkgs-mozilla.url = github:mozilla/nixpkgs-mozilla;
+
+   outputs = { self, nixpkgs, nixpkgs-mozilla }: {
+     devShell."x86_64-linux" = let
+       pkgs = import nixpkgs { system = "x86_64-linux"; overlays = [ nixpkgs-mozilla.overlay ]; };
+     in pkgs.mkShell {
+       buildInputs = [ pkgs.latest.rustChannels.nightly.rust ];
+     };
+   };
+  }
+The available overlays are ``nixpkgs-mozilla.overlay`` for the
+default overlay containing everything, and
+``nixpkgs-mozilla.{lib, rust, rr, firefox, git-cinnabar}-overlay``
+respectively. Depending on your use case, you might need to set the
+``--impure`` flag when invoking the ``nix`` command. This is because
+this repository fetches resources from non-pinned URLs
+non-reproducibly.
 
 Firefox Development Environment
 -------------------------------
@@ -132,6 +158,9 @@ toolchain or architecture.
   ~/mozilla-central$ nix-shell ../nixpkgs-mozilla/release.nix -A gecko.x86_64-linux.gcc --pure
     ... pull the rust compiler
     ... compile the toolchain
+  # First time only - initialize virtualenv
+  [~/mozilla-central] python ./mach create-mach-environment
+     ... create .mozbuild/_virtualenvs/mach
   [~/mozilla-central] python ./mach build
     ... build firefox desktop
   [~/mozilla-central] python ./mach run
@@ -151,7 +180,7 @@ default one, with your own options.
 
   ac_add_options --enable-js-shell
   ac_add_options --disable-tests
-  [~/mozilla-central] export MOZCONFIG=$(pwd)/.mozconfig
+  [~/mozilla-central] export MOZCONFIG="$(pwd)/.mozconfig"
   [~/mozilla-central] python ./mach build
 
 To avoid repeating yourself, you can also rely on the ``NIX_SHELL_HOOK``
@@ -183,12 +212,8 @@ To get your commits into Phabricator, some options include:
   <https://github.com/mozilla-conduit/arcanist>`_ but it isn't yet
   packaged. (PRs welcome.)
 
-- `moz-phab <https://github.com/mozilla-conduit/review>`_, a small
-  Python script that wraps Arcanist to try to handle commit series
-  better than stock Arcanist. Because it wraps Arcanist, it suffers
-  from the same problems that Arcanist does if you use git-cinnabar,
-  and may work better if you use Mozilla's Arcanist fork.  ``moz-phab``
-  isn't packaged yet. (PRs welcome.)
+- `moz-phab <https://github.com/mozilla-conduit/review>`_, an in-house
+  CLI for Phabricator. It's available in nix packages (unstable channel).
 
 - `phlay <https://github.com/mystor/phlay>`_, a small Python script
   that speaks to the Phabricator API directly. This repository ships a

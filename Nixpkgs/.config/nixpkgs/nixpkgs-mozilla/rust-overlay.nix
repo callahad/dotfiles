@@ -11,20 +11,26 @@ let
 
   parseRustToolchain = file: with builtins;
     if file == null then
-      {}
+      { }
+    # Parse *.toml files as TOML
+    else if self.lib.strings.hasSuffix ".toml" file then
+      ({ channel ? null, date ? null, ... }: { inherit channel date; })
+        (fromTOML (readFile file)).toolchain
     else
-    let
-      # matches toolchain descriptions of type "nightly" or "nightly-2020-01-01"
-      channel_by_name = match "([a-z]+)(-([0-9]{4}-[0-9]{2}-[0-9]{2}))?.*" (readFile file);
-      # matches toolchain descriptions of type "1.34.0" or "1.34.0-2019-04-10"
-      channel_by_version = match "([0-9]+\\.[0-9]+\\.[0-9]+)(-([0-9]{4}-[0-9]{2}-[0-9]{2}))?.*" (readFile file);
-    in
+    # Otherwise, assume the file contains just a rust version string
+      let
+        str = readFile file;
+        # Match toolchain descriptions of type "nightly" or "nightly-2020-01-01"
+        channel_by_name = match "([a-z]+)(-([0-9]{4}-[0-9]{2}-[0-9]{2}))?.*" str;
+        # Match toolchain descriptions of type "1.34.0" or "1.34.0-2019-04-10"
+        channel_by_version = match "([0-9]+\\.[0-9]+\\.[0-9]+)(-([0-9]{4}-[0-9]{2}-[0-9]{2}))?.*" str;
+      in
       (x: { channel = head x; date = (head (tail (tail x))); }) (
         if channel_by_name != null then
           channel_by_name
         else
           channel_by_version
-        );
+      );
 
   # See https://github.com/rust-lang-nursery/rustup.rs/blob/master/src/dist/src/dist.rs
   defaultDistRoot = "https://static.rust-lang.org";
@@ -97,7 +103,7 @@ let
       pkg = pkgs.${pkgname};
       srcInfo = pkg.target.${target};
     in
-      (super.fetchurl { url = srcInfo.xz_url; sha256 = srcInfo.xz_hash; });
+      (super.fetchurl { url = srcInfo.xz_url or srcInfo.url; sha256 = srcInfo.xz_hash or srcInfo.hash; });
 
   checkMissingExtensions = pkgs: pkgname: stdenv: extensions:
     let
@@ -253,7 +259,7 @@ let
   #                       All extensions in this list will be installed for the target architectures.
   #                       *Attention* If you want to install an extension like rust-src, that has no fixed architecture (arch *),
   #                       you will need to specify this extension in the extensions options or it will not be installed!
-  fromManifestFile = manifest: { stdenv, fetchurl, patchelf }:
+  fromManifestFile = manifest: { stdenv, lib, fetchurl, patchelf }:
     let
       inherit (builtins) elemAt;
       inherit (super) makeOverridable;
@@ -285,6 +291,15 @@ let
               done
             '';
 
+            # Export the manifest file as part of the nix-support files such
+            # that one can compute the sha256 of a manifest to freeze it for
+            # reproducible builds.
+            MANIFEST_FILE = manifest;
+            postInstall = ''
+              mkdir $out/nix-support
+              cp $MANIFEST_FILE $out/nix-support/manifest.toml
+            '';
+
             # Add the compiler as part of the propagated build inputs in order
             # to run:
             #
@@ -293,14 +308,14 @@ let
             # And get a fully working Rust compiler, with the stdenv linker.
             propagatedBuildInputs = [ stdenv.cc ];
 
-            meta.platforms = stdenv.lib.platforms.all;
+            meta.platforms = lib.platforms.all;
           }
       ) { extensions = []; targets = []; targetExtensions = []; }
     );
 
-  fromManifest = sha256: manifest: { stdenv, fetchurl, patchelf }:
+  fromManifest = sha256: manifest: { stdenv, lib, fetchurl, patchelf }:
     let manifestFile = if sha256 == null then builtins.fetchurl manifest else fetchurl { url = manifest; inherit sha256; };
-    in fromManifestFile manifestFile { inherit stdenv fetchurl patchelf; };
+    in fromManifestFile manifestFile { inherit stdenv lib fetchurl patchelf; };
 
 in
 
@@ -314,8 +329,9 @@ rec {
 
   rustChannelOf = { sha256 ? null, ... } @ manifest_args: fromManifest
     sha256 (manifest_v2_url manifest_args)
-    { inherit (self) stdenv fetchurl patchelf; }
-    ;
+    { inherit (super) lib;
+      inherit (self) stdenv fetchurl patchelf;
+    } ;
 
   # Set of packages which are automagically updated. Do not rely on these for
   # reproducible builds.

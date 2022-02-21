@@ -134,6 +134,11 @@ let
         '';
       };
 
+  # Convert The version number from "96.0a1" to 96 integer.
+  getMajorVersion = version:
+    with builtins;
+    fromJSON (head (match "([0-9]+)[.].*" version.version));
+
   firefoxVersion = version:
     let info = versionInfo version; in
     super.wrapFirefox ((self.firefox-bin-unwrapped.override {
@@ -144,8 +149,19 @@ let
     }).overrideAttrs (old: {
       # Add a dependency on the signature check.
       src = fetchVersion info;
+
+      # Since Firefox 96.0a1, Firefox depends on libXtst, which is not yet
+      # reflected on Nixpkgs.
+      libPath = with super.lib;
+        old.libPath
+        + optionalString (96 >= getMajorVersion version) (":" + makeLibraryPath [self.xorg.libXtst]);
     })) {
-      browserName = "firefox";
+      ${
+        if super.firefox-unwrapped ? applicationName then
+          "applicationName"
+        else
+          "browserName"
+      } = "firefox";
       pname = "firefox-bin";
       desktopName = "Firefox";
     };
@@ -186,8 +202,8 @@ in
   # Set of packages which used to build developer environment
   devEnv = (super.shell or {}) // {
     gecko = super.callPackage ./pkgs/gecko {
-      inherit (self.python36Packages) setuptools;
-      pythonFull = self.python36Full;
+      inherit (self.python38Packages) setuptools;
+      pythonFull = self.python38Full;
       nodejs =
         if builtins.compareVersions self.nodejs.name "nodejs-8.11.3" < 0
         then self.nodejs-8_x else self.nodejs;
@@ -200,8 +216,8 @@ in
       # Due to std::ascii::AsciiExt changes in 1.23, Gecko does not compile, so
       # use the latest Rust version before 1.23.
       # rust = (super.rustChannelOf { channel = "stable"; date = "2017-11-22"; }).rust;
+      # rust = (super.rustChannelOf { channel = "stable"; date = "2020-03-12"; }).rust;
       inherit (self.latest.rustChannels.stable) rust;
-      valgrind = self.valgrind-3_14;
     };
   };
 
@@ -214,11 +230,5 @@ in
     };
   };
 
-  valgrind-3_14 = super.valgrind.overrideAttrs (attrs: {
-    name = "valgrind-3.14.0";
-    src = super.fetchurl {
-      url = "http://www.valgrind.org/downloads/valgrind-3.14.0.tar.bz2";
-      sha256 = "19ds42jwd89zrsjb94g7gizkkzipn8xik3xykrpcqxylxyzi2z03";
-    };
-  });
+  jsdoc = super.callPackage ./pkgs/jsdoc {};
 }
