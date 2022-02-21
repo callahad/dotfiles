@@ -8,7 +8,6 @@ in
   # Gnome Extensions
   gnomeExtensions = super.gnomeExtensions // {
     syncthing-icon = callPackage ./pkgs/gnomeExtensions/syncthing-icon.nix { };
-    desktop-icons = callPackage ./pkgs/gnomeExtensions/desktop-icons.nix { };
   };
 
   ranger = super.ranger.overrideAttrs(oldAttrs: {
@@ -75,7 +74,6 @@ in
     ] ++ (with gnomeExtensions; [
       appindicator
       caffeine
-      #desktop-icons
       gsconnect
       syncthing-icon
     ]);
