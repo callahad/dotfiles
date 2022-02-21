@@ -24,10 +24,10 @@ in
     name = "my-env";
     paths = with self; [
       # GUI Applications
-      calibre
+      #calibre
       celluloid
       deluge
-      digikam
+      #digikam
       flameshot
       gimp
       google-chrome
@@ -37,7 +37,7 @@ in
       latest.firefox-beta-bin
       libreoffice-fresh
       mpv
-      noson
+      #noson
       nextcloud-client
       peek
       quodlibet-full
@@ -75,9 +75,9 @@ in
     ] ++ (with gnomeExtensions; [
       appindicator
       caffeine
-      topicons-plus
+      #desktop-icons
+      gsconnect
       syncthing-icon
-      desktop-icons
     ]);
   };
 }
