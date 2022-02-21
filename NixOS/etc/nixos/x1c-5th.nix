@@ -15,8 +15,8 @@
 
 
   # Nix Daemon
-  nix.maxJobs = lib.mkDefault 4;
-  nix.autoOptimiseStore = true;
+  nix.settings.max-jobs = lib.mkDefault 4;
+  nix.settings.auto-optimise-store = true;
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -62,10 +62,7 @@
       patches = (oldAttrs.patches or []) ++ [
         # Add support for enabling unlocking when resuming from sleep
         # See: https://github.com/Drive-Trust-Alliance/sedutil/pull/190
-        (builtins.fetchurl {
-          url = https://patch-diff.githubusercontent.com/raw/Drive-Trust-Alliance/sedutil/pull/190.patch; 
-          sha256 = "c0618a319eb0c9a6efe9c72db59338232b235079042ccf77b1d690f64f735a42";
-        })
+        ./sedutil-1.20.0-pr190.patch
       ];
     }));
   };

@@ -10,10 +10,11 @@
   # ...Remove GNOME packages I don't want
   environment.gnome.excludePackages = with pkgs.gnome; [
     epiphany
+    pkgs.gnome-connections
     gnome-logs
     gnome-maps
     gnome-music
-    gnome-photos
+    pkgs.gnome-photos
   ];
   programs.geary.enable = false;
 
