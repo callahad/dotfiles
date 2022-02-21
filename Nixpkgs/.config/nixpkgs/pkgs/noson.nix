@@ -8,13 +8,13 @@
 
 mkDerivation rec {
   pname = "noson";
-  version = "4.4.1";
+  version = "5.0.8";
 
   src = fetchFromGitHub {
     owner = "janbar";
     repo = "noson-app";
     rev = version;
-    sha256 = "1l9kfvfsk27yxznwn13kfagy8cgbpv441cnypsdsmk9hfbg5b99k";
+    hash = "sha256-DhPYyOdvEpAf38JREWqHuIyheeC6S6YQxXo9BYKJZbs=";
   };
 
   nativeBuildInputs = [

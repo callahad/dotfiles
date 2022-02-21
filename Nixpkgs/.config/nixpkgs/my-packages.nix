@@ -1,7 +1,7 @@
 self: super:
 
 let
-  inherit (super) callPackage fetchurl fetchFromGitHub libsForQt5;
+  inherit (super) callPackage fetchurl fetchFromGitHub libsForQt514;
 in
 
 {
@@ -17,7 +17,7 @@ in
     ];
   });
 
-  noson = libsForQt5.callPackage ./pkgs/noson.nix { };
+  noson = libsForQt514.callPackage ./pkgs/noson.nix { };
 
   # sudo nix-channel --update; nix-env -ir my-env
   my-env = super.buildEnv {
