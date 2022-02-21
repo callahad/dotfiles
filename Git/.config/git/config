@@ -6,7 +6,7 @@
     defaultBranch = main
 [alias]
     ci = commit
-    st = status
+    st = status --short --branch
     glog = log --pretty=format:\"%C(yellow)%h %C(cyan)%ad%Cred%d %Creset%s%Cblue [%an]\" --graph --decorate --date=short
     sclone = clone --depth=1
 [core]
