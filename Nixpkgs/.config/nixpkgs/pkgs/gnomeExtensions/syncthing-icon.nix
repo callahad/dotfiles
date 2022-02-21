@@ -1,4 +1,4 @@
-{ stdenv, lib, fetchFromGitHub, glib, zip, unzip, gnome3, systemd, webkitgtk }:
+{ stdenv, lib, fetchFromGitHub, glib, zip, unzip, gjs, systemd, webkitgtk }:
 
 stdenv.mkDerivation rec {
   name = "gnome-shell-extension-syncthing-${version}";
@@ -7,12 +7,12 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "jaystrictor";
     repo = "gnome-shell-extension-syncthing";
-    rev = "37e590d5fe4bef40cad1492fa664f841dbc6a980";
-    sha256 = "1wbyqs03ml6kjjf4x2vmwp6w5jphf59r27n5qr7i5gvqimbby4ki";
+    rev = "v33";
+    sha256 = "sha256-B+RbObiK2PC7PiM20s7DrFoshopecw1RZg2uSRagv7M=";
   };
 
   nativeBuildInputs = [ glib zip unzip ];
-  buildInputs = [ gnome3.gjs webkitgtk systemd ];
+  buildInputs = [ gjs webkitgtk systemd ];
 
   patches = [
     ./fix-syncthing-icon.patch
@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
     substituteInPlace src/systemd.js \
       --replace "/bin/systemctl" "${systemd}/bin/systemctl"
     substituteInPlace src/extension.js \
-      --replace "gjs" "${gnome3.gjs}/bin/gjs"
+      --replace "gjs" "${gjs}/bin/gjs"
     substituteInPlace src/webviewer.js \
       --subst-var-by webkitPath "${webkitgtk}/lib/girepository-1.0"
   '';
