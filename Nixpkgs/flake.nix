@@ -68,6 +68,7 @@
           ffmpeg-full
           highlight
           ncdu
+          (neovim.override { vimAlias = true; viAlias = true; })
           oathToolkit
           pdftk
           qpdf

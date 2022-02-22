@@ -1,7 +1,7 @@
 {
   description = "NixOS System Configurations";
 
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-21.11";
   inputs.secrets.url = "path:/etc/nixos-secrets";
 
   outputs = { self, nixpkgs, secrets }: {

@@ -15,8 +15,8 @@
 
 
   # Nix Daemon
-  nix.settings.max-jobs = lib.mkDefault 4;
-  nix.settings.auto-optimise-store = true;
+  nix.maxJobs = lib.mkDefault 4;
+  nix.autoOptimiseStore = true;
   nix.gc = {
     automatic = true;
     dates = "weekly";

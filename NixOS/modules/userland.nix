@@ -1,14 +1,6 @@
 { pkgs, ... }:
 
 {
-  nixpkgs.config.allowUnfree = true;
-
-  # Package Overrides
-  nixpkgs.config.packageOverrides = pkgs: {
-    # Alias vi and vim to neovim
-    neovim = pkgs.neovim.override { vimAlias = true; viAlias = true; };
-  };
-
   # Software
   environment.systemPackages = with pkgs; [
     # Basic Console Utilities
@@ -42,7 +34,7 @@
     fd
     fish any-nix-shell
     htop
-    neovim
+    (neovim.override { vimAlias = true; viAlias = true; })
     ripgrep
 
     # Archives

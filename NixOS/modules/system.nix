@@ -10,6 +10,7 @@
   sound.enable = true;
 
   # Printing / Scanning
+  nixpkgs.config.allowUnfree = true; # For hardware.sane.dsseries
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.brlaser ];
   hardware.sane.enable = true;
