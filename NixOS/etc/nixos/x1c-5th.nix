@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, secrets, ... }:
 
 {
   # Host
@@ -74,7 +74,7 @@
     documentation = [ "https://github.com/Drive-Trust-Alliance/sedutil/pull/190" ];
     path = [ pkgs.sedutil ];
     # Note: Generate password hash with: sedutil-cli --printPasswordHash PASSWORD /dev/nvme0n1
-    script = "sedutil-cli -n -x --prepareForS3Sleep 0 ${(import ./secrets.nix).diskPasswordHash} /dev/nvme0n1";
+    script = "sedutil-cli -n -x --prepareForS3Sleep 0 ${secrets.diskPasswordHash} /dev/nvme0n1";
     wantedBy = [ "multi-user.target" ];
   };
 
