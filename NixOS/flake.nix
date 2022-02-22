@@ -2,7 +2,7 @@
   description = "NixOS System Configurations";
 
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-  inputs.secrets.url = "path:/etc/nixos/secrets";
+  inputs.secrets.url = "path:/etc/nixos-secrets";
 
   outputs = { self, nixpkgs, secrets }: {
 
