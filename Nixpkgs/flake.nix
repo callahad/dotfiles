@@ -3,6 +3,11 @@
   # TODO: Bring back noson, gnomeExtensions.syncthing-icon and patched ranger
   # TODO: Investigate https://github.com/oxalica/rust-overlay, used by Pijul
 
+  # To use:
+  #   nix flake update path:.
+  #   nix profile install path:.
+  #   nix profile upgrade '.*'
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-release.url = "github:nixos/nixpkgs/nixos-21.11";
