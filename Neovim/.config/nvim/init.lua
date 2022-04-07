@@ -1,5 +1,4 @@
 --[[ Aliases ]]
-local cmd = vim.cmd
 local opt = vim.opt
 
 --[[ Global Options ]]
@@ -23,9 +22,9 @@ opt.smartcase = true
 opt.inccommand = 'nosplit' -- Preview effect of s/foo/bar interactively
 
 -- Use \v (verymagic) regex syntax for interactive searches
-cmd('nnoremap / /\\v')
-cmd('vnoremap / /\\v')
-cmd('cnoremap %s/ %s/\\v')
+vim.cmd('nnoremap / /\\v')
+vim.cmd('vnoremap / /\\v')
+vim.cmd('cnoremap %s/ %s/\\v')
 
 --[[ Editing ]]
 opt.tabstop = 4
@@ -105,4 +104,4 @@ require('packer').startup(function(use)
     end
 end)
 
-cmd('colorscheme xoria256mod')
+vim.cmd('colorscheme xoria256mod')
