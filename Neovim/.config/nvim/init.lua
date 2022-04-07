@@ -39,6 +39,7 @@ opt.copyindent = true
 --[[ Behavior ]]
 opt.completeopt:append('longest')
 opt.wildmode = { 'longest:full', 'full' }
+opt.updatetime = 250 -- Delay before triggering CursorHold events
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -47,6 +48,12 @@ vim.g.maplocalleader = ' '
 -- Work around this by directly overwriting the original file when saving.
 -- https://vi.stackexchange.com/questions/25030/
 opt.backupcopy = 'yes'
+
+--[[ Diagnostics ]]
+vim.diagnostic.config({ virtual_text = false }) -- Don't show messages inline
+
+-- Automatically show diagnostics in a hover window
+vim.cmd 'autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})'
 
 --[[ Plugins ]]
 -- Bootstrap Packer
