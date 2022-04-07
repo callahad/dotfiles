@@ -39,6 +39,8 @@ opt.copyindent = true
 --[[ Behavior ]]
 opt.completeopt:append('longest')
 opt.wildmode = { 'longest:full', 'full' }
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 --[[ Quirks ]]
 -- File watchers like inotify can lose track of files modified by Vim.
@@ -109,9 +111,15 @@ require('packer').startup(function(use)
              { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
          },
          config = function()
+             -- Use the fzf extension for better result ordering
              require('telescope').load_extension('fzf')
+
              vim.cmd[[
-                nnoremap <C-p> <cmd>Telescope find_files<cr>
+                nnoremap <Leader>ff <cmd>Telescope find_files<cr>
+                nnoremap <Leader>fF <cmd>Telescope find_files hidden=true<cr>
+                nnoremap <Leader>fg <cmd>Telescope live_grep<cr>
+                nnoremap <Leader>fb <cmd>Telescope buffers<cr>
+                nnoremap <Leader>fh <cmd>Telescope help_tags<cr>
              ]]
          end
     }
