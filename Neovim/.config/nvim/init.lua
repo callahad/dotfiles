@@ -16,6 +16,9 @@ opt.listchars = {
     tab = '⇥·',
 }
 
+-- Terminal.app on macOS doesn't support 24 bit color. Others do.
+opt.termguicolors = (vim.env.TERM_PROGRAM ~= 'Apple_Terminal')
+
 --[[ Searching ]]
 opt.ignorecase = true
 opt.smartcase = true
@@ -56,6 +59,21 @@ require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     -- Colorschemes
+    use 'sjl/badwolf'
+    use 'morhetz/gruvbox'
+        vim.g.gruvbox_italic = 1
+        vim.g.gruvbox_contrast_dark = 'hard'
+    use 'w0ng/vim-hybrid'
+    use 'nanotech/jellybeans.vim'
+        vim.g.jellybeans_use_term_italics = 1
+    use 'jonathanfilip/vim-lucius'
+        vim.g.lucius_contrast = 'low'
+        vim.g.lucius_contrast_bg = 'high'
+    use 'KeitaNakamura/neodark.vim'
+        vim.g['neodark#use_256color'] = 1
+        vim.g['neodark#terminal_transparent'] = 1
+    use 'junegunn/seoul256.vim'
+        vim.g.seoul256_background = 234
     use 'deu/vim-xoria256mod'
 
     -- Editing
@@ -104,4 +122,4 @@ require('packer').startup(function(use)
     end
 end)
 
-vim.cmd('colorscheme xoria256mod')
+vim.cmd('colorscheme gruvbox')
