@@ -212,6 +212,13 @@ require('packer').startup(function(use)
         end
     }
 
+    -- Use LSP to show signatures while typing
+    use {
+        'ray-x/lsp_signature.nvim',
+        config = function()
+            require('lsp_signature').setup()
+        end
+    }
 
     -- Completion
     -- Mainly just for LSP. I could get 99% of what I want from nvim-lspconfig,
