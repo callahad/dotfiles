@@ -37,7 +37,7 @@ opt.expandtab = true
 opt.copyindent = true
 
 --[[ Behavior ]]
-opt.completeopt:append('longest')
+opt.completeopt = { 'menu', 'menuone', 'noselect' }
 opt.wildmode = { 'longest:full', 'full' }
 opt.updatetime = 250 -- Delay before triggering CursorHold events
 vim.g.mapleader = ' '
@@ -157,6 +157,7 @@ require('packer').startup(function(use)
     -- Language Server Protocol (LSP) support
     use {
         'neovim/nvim-lspconfig',
+        requires = { 'hrsh7th/cmp-nvim-lsp' },
 
         -- https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
         config = function()
@@ -169,7 +170,8 @@ require('packer').startup(function(use)
                 local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
                 -- Enable completion triggered by <c-x><c-o>
-                buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+                -- Note: Disabled in favor of using nvim-cmp below
+                --buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
                 -- Mappings.
                 local opts = { noremap=true, silent=true }
@@ -196,15 +198,43 @@ require('packer').startup(function(use)
 
             -- Use a loop to conveniently call 'setup' on multiple servers and
             -- map buffer local keybindings when the language server attaches
+            -- ...Also, integrate nvim-cmp with the LSP's capabilities
+            local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
             local servers = { 'pyright', 'solargraph' }
             for _, lsp in ipairs(servers) do
                 nvim_lsp[lsp].setup {
                     on_attach = on_attach,
                     flags = {
                       debounce_text_changes = 150,
-                    }
+                    },
+                    capabilities = capabilities
                 }
             end
+        end
+    }
+
+
+    -- Completion
+    -- Mainly just for LSP. I could get 99% of what I want from nvim-lspconfig,
+    -- but nvim-cmp offers nice fuzzy matching, so might as well use it.
+    use {
+        'hrsh7th/nvim-cmp',
+        requires = {
+            'hrsh7th/cmp-nvim-lsp',
+        },
+
+        config = function()
+            local cmp = require('cmp')
+
+            cmp.setup({
+                completion = { autocomplete = false },
+                sources = {
+                    { name = 'nvim_lsp' },
+                },
+            })
+
+            -- Use nvim-cmp instead of traditional omnifunction completion
+            vim.cmd "inoremap <C-x><C-o> <Cmd>lua require('cmp').complete()<CR>"
         end
     }
 
