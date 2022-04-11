@@ -144,7 +144,7 @@ require('packer').startup(function(use)
              -- Use the fzf extension for better result ordering
              require('telescope').load_extension('fzf')
 
-             vim.cmd[[
+             vim.cmd [[
                 nnoremap <Leader>ff <cmd>Telescope find_files<cr>
                 nnoremap <Leader>fF <cmd>Telescope find_files hidden=true<cr>
                 nnoremap <Leader>fg <cmd>Telescope live_grep<cr>
