@@ -230,6 +230,19 @@ require('packer').startup(function(use)
                 sources = {
                     { name = 'nvim_lsp' },
                 },
+                mapping = {
+                  ['<CR>'] = cmp.mapping.confirm(),
+
+                  ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+                  ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+
+                  -- Repurpose <C-y>/<C-e> pair (by default, they scroll the buffer)
+                  ['<C-y>'] = cmp.config.disable,
+                  ['<C-e>'] = cmp.mapping({
+                    i = cmp.mapping.abort(),
+                    c = cmp.mapping.close(),
+                  }),
+                },
             })
 
             -- Use nvim-cmp instead of traditional omnifunction completion
