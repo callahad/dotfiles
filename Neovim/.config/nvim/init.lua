@@ -53,7 +53,7 @@ opt.backupcopy = 'yes'
 vim.diagnostic.config({ virtual_text = false }) -- Don't show messages inline
 
 -- Automatically show diagnostics in a hover window
-vim.cmd 'autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})'
+--vim.cmd 'autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})'
 
 --[[ Plugins ]]
 -- Bootstrap Packer
