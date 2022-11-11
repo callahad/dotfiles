@@ -9,19 +9,22 @@
   services.pcscd.enable = true;
   sound.enable = true;
 
+  # PipeWire Audio
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
   # Printing / Scanning
   nixpkgs.config.allowUnfree = true; # For hardware.sane.dsseries
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.brlaser ];
   hardware.sane.enable = true;
   hardware.sane.dsseries.enable = true;
-
-  # Bluetooth Audio (including AptX and other codecs)
-  hardware.pulseaudio = {
-    enable = true;
-    extraModules = [ pkgs.pulseaudio-modules-bt ];
-    package = pkgs.pulseaudioFull;
-  };
 
   # Logitech Wireless Mouse
   hardware.logitech.wireless = {
