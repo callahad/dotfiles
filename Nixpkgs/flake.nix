@@ -10,7 +10,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-release.url = "github:nixos/nixpkgs/nixos-21.11";
+    nixpkgs-release.url = "github:nixos/nixpkgs/nixos-22.05";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -20,19 +20,31 @@
     let
       # Note: You can set overlays and config as params to import.
       # E.g., pkgs = import nixpkgs { config = { allowUnfree = true; } };
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          chromium.commandLineArgs = "--ozone-platform-hint=auto";
+          allowUnfreePredicate = pkg:
+            builtins.elem (pkg.pname or (builtins.parseDrvName(pkg.name).name))
+              [ "obsidian" ];
+        };
+      };
       pkgs-release = import nixpkgs-release { inherit system; };
+      ranger = pkgs.ranger.overrideAttrs (old: {
+        patches = (old.patches or []) ++ [
+          ./pkgs/ranger.patch
+        ];
+      });
 
     in rec {
       packages.my-env = pkgs.buildEnv {
         name = "my-env";
         paths = with pkgs; [
           # GUI Applications
-          calibre
+          #calibre - was failing to build with qtwebengine
           celluloid
           deluge
           pkgs-release.digikam
-          flameshot
           gimp
           chromium
           inkscape
@@ -43,18 +55,19 @@
           mpv
           #noson
           nextcloud-client
+          nsxiv
+          obsidian
           peek
           quodlibet-full
           rapid-photo-downloader
           simple-scan
-          sxiv
           vlc
 
           # Development
           delta
           devd
-          docker_compose
-          emacs
+          docker-compose
+          emacsNativeComp
           gitAndTools.gitSVN
           gitAndTools.hub
           gitAndTools.tig
@@ -77,7 +90,7 @@
           stow
           syncthing
           xclip
-          youtube-dl aria
+          yt-dlp aria
         ] ++ (with gnomeExtensions; [
           appindicator
           caffeine
