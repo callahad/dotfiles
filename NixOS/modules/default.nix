@@ -5,6 +5,7 @@
     ./userland.nix
     ./flakes.nix
     ./fonts.nix
+    #./plasma.nix
     ./gnome.nix
   ];
 }
