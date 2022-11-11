@@ -7,6 +7,7 @@
   services.flatpak.enable = true;
   services.fwupd.enable = true;
   services.pcscd.enable = true;
+  services.tailscale.enable = true;
   sound.enable = true;
 
   # PipeWire Audio
