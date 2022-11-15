@@ -137,6 +137,7 @@ require('packer').startup(function(use)
                     "svelte",
                     "toml",
                     "typescript",
+                    "vim",
                     "yaml",
                 },
                 highlight = { enable = true },
