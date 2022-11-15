@@ -55,6 +55,16 @@ vim.diagnostic.config({ virtual_text = false }) -- Don't show messages inline
 -- Automatically show diagnostics in a hover window
 --vim.cmd 'autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})'
 
+--[[ Filetype Tweaks ]]
+vim.cmd [[
+    augroup FiletypeTweaks
+        autocmd!
+        autocmd BufRead,BufNewFile poetry.lock set filetype=toml
+        autocmd FileType markdown,text setlocal spell textwidth=0 linebreak
+        autocmd FileType gitcommit setlocal colorcolumn+=51
+    augroup end
+]]
+
 --[[ Plugins ]]
 -- Bootstrap Packer
 local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
