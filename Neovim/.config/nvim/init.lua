@@ -111,6 +111,7 @@ require('packer').startup(function(use)
     -- Tree Sitter: Fault-tolerant parser / syntax highlighter
     use {
         'nvim-treesitter/nvim-treesitter',
+        requires = { 'windwp/nvim-ts-autotag' },
         run = ':TSUpdate',
         config = function()
             require('nvim-treesitter.configs').setup {
@@ -139,6 +140,7 @@ require('packer').startup(function(use)
                     "yaml",
                 },
                 highlight = { enable = true },
+                autotag = { enable = true }, -- From windwp/nvim-ts-autotag
             }
         end
     }
@@ -264,6 +266,14 @@ require('packer').startup(function(use)
 
             -- Use nvim-cmp instead of traditional omnifunction completion
             vim.cmd "inoremap <C-x><C-o> <Cmd>lua require('cmp').complete()<CR>"
+        end
+    }
+
+    -- Automatically insert / delete matching characters
+    use {
+        'windwp/nvim-autopairs',
+        config = function()
+            require('nvim-autopairs').setup()
         end
     }
 
