@@ -5,11 +5,12 @@ else if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]
     fenv source "$HOME/.nix-profile/etc/profile.d/nix.sh"
 end
 
-# Stay in Fish after calling `nix-shell` or `nix run`
-if command -v any-nix-shell > /dev/null
-    any-nix-shell fish --info-right | source
+# Set up Direnv
+if type -q direnv
+    direnv hook fish | source
 end
 
+# Prefer Neovim
 if type -q nvim
     set -x EDITOR "nvim"
 else
