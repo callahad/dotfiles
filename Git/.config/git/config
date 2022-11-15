@@ -14,6 +14,7 @@
     precomposeUnicode = true
 [push]
     default = simple
+    autoSetupRemote = true
 [commit]
     gpgSign = true
     verbose = true
@@ -45,5 +46,5 @@
     line-numbers-right-style = yellow
 
 # Dayjob config
-[includeIf "gitdir:~/Projects/Element/"]
-    path = ~/.config/git/config-element
+[includeIf "gitdir:~/Projects/Suborbital/"]
+    path = ~/.config/git/config-suborbital
