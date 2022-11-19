@@ -332,9 +332,5 @@ end)
 vim.cmd('colorscheme gruvbox')
 
 -- Recompile Packer's lazy-loading code whenever this file is saved
-vim.cmd [[
-    augroup Packer
-        autocmd!
-        autocmd BufWritePost init.lua PackerCompile
-    augroup END
-]]
+vim.cmd 'autocmd! BufWritePost init.lua source | PackerCompile'
+vim.cmd 'autocmd! User PackerCompileDone echo "PackerCompile completed"'
