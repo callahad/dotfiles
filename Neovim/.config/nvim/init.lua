@@ -154,8 +154,10 @@ require('packer').startup(function(use)
     use {
         'nvim-telescope/telescope.nvim',
          requires = {
-             'nvim-lua/plenary.nvim',
-             { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+            'nvim-lua/plenary.nvim',
+            { 'nvim-telescope/telescope-fzf-native.nvim',
+                run = 'nix shell nixpkgs#gcc nixpkgs#gnumake -c make'
+            },
          },
          config = function()
              -- Use the fzf extension for better result ordering
