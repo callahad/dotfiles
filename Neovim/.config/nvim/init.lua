@@ -79,9 +79,13 @@ require('packer').startup(function(use)
 
     -- Colorschemes
     use 'sjl/badwolf'
-    use 'morhetz/gruvbox'
+    use {
+        'morhetz/gruvbox',
+        config = function() vim.cmd('colorscheme gruvbox') end
+    }
         vim.g.gruvbox_italic = 1
         vim.g.gruvbox_contrast_dark = 'hard'
+        vim.g.gruvbox_contrast_light = 'hard'
     use 'w0ng/vim-hybrid'
     use 'nanotech/jellybeans.vim'
         vim.g.jellybeans_use_term_italics = 1
@@ -328,8 +332,6 @@ require('packer').startup(function(use)
         require('packer').sync()
     end
 end)
-
-vim.cmd('colorscheme gruvbox')
 
 -- Recompile Packer's lazy-loading code whenever this file is saved
 vim.cmd 'autocmd! BufWritePost init.lua source | PackerCompile'
