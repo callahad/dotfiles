@@ -288,43 +288,39 @@ require('packer').startup(function(use)
     use {
         'kyazdani42/nvim-tree.lua',
         config = function()
-            vim.cmd [[
-                nnoremap <Leader>t <cmd>NvimTreeToggle<cr>
-
-                let g:nvim_tree_add_trailing = 1
-                let g:nvim_tree_show_icons = {
-                    \ 'git': 1,
-                    \ 'folders': 1,
-                    \ 'files': 1,
-                    \ 'folder_arrows': 0,
-                \ }
-                let g:nvim_tree_icons = {
-                    \ 'default': "",
-                    \ 'symlink': "",
-                    \ 'git': {
-                    \   'unstaged': "✎",
-                    \   'staged': "✓",
-                    \   'unmerged': "?",
-                    \   'renamed': "➜",
-                    \   'untracked': "◦",
-                    \   'deleted': "✗",
-                    \   'ignored': "∌"
-                    \   },
-                    \ 'folder': {
-                    \   'arrow_open': "▼",
-                    \   'arrow_closed': "▶",
-                    \   'default': "▶",
-                    \   'open': "▼",
-                    \   'empty': "▷",
-                    \   'empty_open': "▽",
-                    \   'symlink': "↪︎",
-                    \   'symlink_open': "⤥",
-                    \   }
-                    \ }
-            ]]
+            vim.cmd 'nnoremap <Leader>t <cmd>NvimTreeToggle<cr>'
 
             require('nvim-tree').setup({
-                renderer = { indent_markers = { enable = true }},
+                renderer = {
+                    add_trailing = true,
+                    icons = {
+                        show = { git = true, file = true, folder = true, folder_arrow = false },
+                        glyphs = {
+                            default = "",
+                            symlink = "",
+                            git = {
+                                unstaged = "✎",
+                                staged = "✓",
+                                unmerged = "?",
+                                renamed = "➜",
+                                untracked = "◦",
+                                deleted = "✗",
+                                ignored = "∌"
+                            },
+                            folder = {
+                                arrow_open = "▼",
+                                arrow_closed = "▶",
+                                default = "▶",
+                                open = "▼",
+                                empty = "▷",
+                                empty_open = "▽",
+                                symlink = "↪︎",
+                                symlink_open = "⤥",
+                            }
+                        }
+                    },
+                    indent_markers = { enable = true },
+                },
             })
         end
     }
