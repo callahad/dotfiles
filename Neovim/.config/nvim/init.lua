@@ -79,6 +79,11 @@ require('packer').startup(function(use)
 
     -- Colorschemes
     use 'sjl/badwolf'
+    use 'catppuccin/nvim'
+    use {
+        'mcchrish/zenbones.nvim',
+        requires = 'rktjmp/lush.nvim'
+    }
     use {
         'morhetz/gruvbox',
         config = function() vim.cmd('colorscheme gruvbox') end
