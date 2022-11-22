@@ -80,28 +80,38 @@ require('packer').startup(function(use)
     -- Colorschemes
     use 'sjl/badwolf'
     use 'catppuccin/nvim'
-    use {
-        'mcchrish/zenbones.nvim',
-        requires = 'rktjmp/lush.nvim'
+    use { 'mcchrish/zenbones.nvim', requires = 'rktjmp/lush.nvim' }
+    use { 'morhetz/gruvbox',
+        config = function()
+            vim.g.gruvbox_italic = 1
+            vim.g.gruvbox_contrast_dark = 'hard'
+            vim.g.gruvbox_contrast_light = 'hard'
+            vim.cmd('colorscheme gruvbox')
+        end
     }
-    use {
-        'morhetz/gruvbox',
-        config = function() vim.cmd('colorscheme gruvbox') end
-    }
-        vim.g.gruvbox_italic = 1
-        vim.g.gruvbox_contrast_dark = 'hard'
-        vim.g.gruvbox_contrast_light = 'hard'
     use 'w0ng/vim-hybrid'
-    use 'nanotech/jellybeans.vim'
-        vim.g.jellybeans_use_term_italics = 1
-    use 'jonathanfilip/vim-lucius'
-        vim.g.lucius_contrast = 'low'
-        vim.g.lucius_contrast_bg = 'high'
-    use 'KeitaNakamura/neodark.vim'
-        vim.g['neodark#use_256color'] = 1
-        vim.g['neodark#terminal_transparent'] = 1
-    use 'junegunn/seoul256.vim'
-        vim.g.seoul256_background = 234
+    use { 'nanotech/jellybeans.vim',
+        config = function()
+            vim.g.jellybeans_use_term_italics = 1
+        end
+    }
+    use { 'jonathanfilip/vim-lucius',
+        config = function()
+            vim.g.lucius_contrast = 'low'
+            vim.g.lucius_contrast_bg = 'high'
+        end
+    }
+    use { 'KeitaNakamura/neodark.vim',
+        config = function()
+            vim.g['neodark#use_256color'] = 1
+            vim.g['neodark#terminal_transparent'] = 1
+        end
+    }
+    use { 'junegunn/seoul256.vim',
+        config = function()
+            vim.g.seoul256_background = 234
+        end
+    }
     use 'deu/vim-xoria256mod'
 
     -- Editing
