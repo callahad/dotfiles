@@ -66,11 +66,17 @@ vim.cmd [[
 ]]
 
 --[[ Plugins ]]
--- Bootstrap Packer
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+local ensure_packer = function()
+    local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+    if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+        vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+        vim.cmd 'packadd packer.nvim'
+        return true
+    end
+    return false
 end
+
+packer_bootstrap = ensure_packer()
 
 -- Install Plugins
 require('packer').startup(function(use)
@@ -123,16 +129,20 @@ require('packer').startup(function(use)
     -- Gitsigns: Slightly cleaner alternative to gitgutter
     use {
         'lewis6991/gitsigns.nvim',
-         requires = 'nvim-lua/plenary.nvim',
-         config = function() require('gitsigns').setup() end
+        requires = 'nvim-lua/plenary.nvim',
+        config = function() if not packer_bootstrap then
+            require('gitsigns').setup()
+        end end
     }
 
     -- Tree Sitter: Fault-tolerant parser / syntax highlighter
     use {
         'nvim-treesitter/nvim-treesitter',
-        requires = { 'windwp/nvim-ts-autotag' },
-        run = ':TSUpdate',
-        config = function()
+        --requires = { 'windwp/nvim-ts-autotag' },
+        run = function() if not packer_bootstrap then
+            require('nvim-treesitter.install').update()()
+        end end,
+        config = function() if not packer_bootstrap then
             require('nvim-treesitter.configs').setup {
                 ensure_installed = {
                     "bash",
@@ -160,21 +170,21 @@ require('packer').startup(function(use)
                     "yaml",
                 },
                 highlight = { enable = true },
-                autotag = { enable = true }, -- From windwp/nvim-ts-autotag
+                --autotag = { enable = true }, -- From windwp/nvim-ts-autotag
             }
-        end
+        end end
     }
 
     -- Telescope: Fuzzy find everything
     use {
         'nvim-telescope/telescope.nvim',
-         requires = {
+        requires = {
             'nvim-lua/plenary.nvim',
             { 'nvim-telescope/telescope-fzf-native.nvim',
                 run = 'nix shell nixpkgs#gcc nixpkgs#gnumake -c make'
             },
          },
-         config = function()
+         config = function() if not packer_bootstrap then
              -- Use the fzf extension for better result ordering
              require('telescope').load_extension('fzf')
 
@@ -185,7 +195,7 @@ require('packer').startup(function(use)
                 nnoremap <Leader>fb <cmd>Telescope buffers<cr>
                 nnoremap <Leader>fh <cmd>Telescope help_tags<cr>
              ]]
-         end
+         end end
     }
 
     -- Language Server Protocol (LSP) support
@@ -194,7 +204,7 @@ require('packer').startup(function(use)
         requires = { 'hrsh7th/cmp-nvim-lsp' },
 
         -- https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
-        config = function()
+        config = function() if not packer_bootstrap then
             local nvim_lsp = require('lspconfig')
 
             -- Use an on_attach function to only map the following keys
@@ -243,15 +253,15 @@ require('packer').startup(function(use)
                     capabilities = capabilities
                 }
             end
-        end
+        end end
     }
 
     -- Use LSP to show signatures while typing
     use {
         'ray-x/lsp_signature.nvim',
-        config = function()
+        config = function() if not packer_bootstrap then
             require('lsp_signature').setup()
-        end
+        end end
     }
 
     -- Completion
@@ -263,7 +273,7 @@ require('packer').startup(function(use)
             'hrsh7th/cmp-nvim-lsp',
         },
 
-        config = function()
+        config = function() if not packer_bootstrap then
             local cmp = require('cmp')
 
             cmp.setup({
@@ -288,21 +298,21 @@ require('packer').startup(function(use)
 
             -- Use nvim-cmp instead of traditional omnifunction completion
             vim.cmd "inoremap <C-x><C-o> <Cmd>lua require('cmp').complete()<CR>"
-        end
+        end end
     }
 
     -- Automatically insert / delete matching characters
     use {
         'windwp/nvim-autopairs',
-        config = function()
+        config = function() if not packer_bootstrap then
             require('nvim-autopairs').setup()
-        end
+        end end
     }
 
     -- File tree
     use {
         'kyazdani42/nvim-tree.lua',
-        config = function()
+        config = function() if not packer_bootstrap then
             vim.cmd 'nnoremap <Leader>t <cmd>NvimTreeToggle<cr>'
 
             require('nvim-tree').setup({
@@ -337,7 +347,7 @@ require('packer').startup(function(use)
                     indent_markers = { enable = true },
                 },
             })
-        end
+        end end
     }
 
     -- Sync plugins if Packer was just installed for the first time
