@@ -1,7 +1,7 @@
 {
   description = "NixOS System Configurations";
 
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
   inputs.secrets.url = "path:/etc/nixos-secrets";
 
   outputs = { self, nixpkgs, secrets }: {

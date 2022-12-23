@@ -15,8 +15,8 @@
 
 
   # Nix Daemon
-  nix.maxJobs = lib.mkDefault 4;
-  nix.autoOptimiseStore = true;
+  nix.settings.max-jobs = lib.mkDefault 4;
+  nix.settings.auto-optimise-store = true;
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -33,8 +33,8 @@
   #   https://github.com/NixOS/nixos-hardware/blob/master/common/cpu/intel/default.nix
   hardware.enableRedistributableFirmware = true;
   hardware.cpu.intel.updateMicrocode = true;
-  hardware.opengl.extraPackages = with pkgs; [ vaapiIntel vaapiVdpau libvdpau-va-gl intel-media-driver ];
-  services.xserver.useGlamor = true;
+  hardware.opengl.extraPackages = with pkgs; [ vaapiIntel libvdpau-va-gl intel-media-driver ];
+  environment.variables = { VDPAU_DRIVER = "va_gl"; };
 
   # 32-bit (Games)
   hardware.opengl.driSupport32Bit = true;
