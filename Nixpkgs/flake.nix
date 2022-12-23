@@ -69,7 +69,6 @@
           docker-compose
           emacsNativeComp
           gitAndTools.gitSVN
-          gitAndTools.hub
           gitAndTools.tig
           gitg
           gron
