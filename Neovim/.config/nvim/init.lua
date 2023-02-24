@@ -126,6 +126,9 @@ require('packer').startup(function(use)
     use 'tpope/vim-surround'
     use 'tpope/vim-unimpaired'
 
+    -- Additional File Types
+    use 'hashivim/vim-terraform'
+
     -- Gitsigns: Slightly cleaner alternative to gitgutter
     use {
         'lewis6991/gitsigns.nvim',
@@ -152,6 +155,7 @@ require('packer').startup(function(use)
                     "dockerfile",
                     "fish",
                     "go",
+                    "hcl",
                     "html",
                     "javascript",
                     "json",
@@ -316,6 +320,9 @@ require('packer').startup(function(use)
             vim.cmd 'nnoremap <Leader>t <cmd>NvimTreeToggle<cr>'
 
             require('nvim-tree').setup({
+                git = {
+                    ignore = false,
+                },
                 renderer = {
                     add_trailing = true,
                     icons = {
