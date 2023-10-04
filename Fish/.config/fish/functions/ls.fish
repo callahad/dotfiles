@@ -1,7 +1,7 @@
 function ls --description 'List contents of directory'
 
-	if type -q exa
-		command exa --all --classify --group --sort=Name $argv
+	if type -q eza
+		command eza --all --classify --group --sort=Name $argv
 	else
 		set -l param
 

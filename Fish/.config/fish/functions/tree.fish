@@ -1,6 +1,6 @@
 function tree --description 'Visualize contents of directories in a tree'
-	if type -q exa
-		command exa --tree --all --classify --group --sort=Name $argv
+	if type -q eza
+		command eza --tree --all --classify --group --sort=Name $argv
 	else if type -q tree
 		command tree -aFC --noreport $argv
 	else

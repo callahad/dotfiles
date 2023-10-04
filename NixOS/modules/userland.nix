@@ -30,7 +30,7 @@
 
     # Enhanced Console Utilities
     bat
-    exa
+    eza
     fd
     fish any-nix-shell
     htop
