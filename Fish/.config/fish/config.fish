@@ -1,8 +1,8 @@
 # Set up Nix on macOS
-if [ -f '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]
-    fenv source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-else if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]
-    fenv source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+if [ -f '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish' ]
+    source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
+else if [ -f "$HOME/.nix-profile/etc/profile.d/nix.fish" ]
+    source "$HOME/.nix-profile/etc/profile.d/nix.fish"
 end
 
 # Set up Direnv
