@@ -10,8 +10,10 @@ if type -q direnv
     direnv hook fish | source
 end
 
-# Prefer Neovim
-if type -q nvim
+# Prefer Helix, then Neovim, then Vim
+if type -q hx
+    set -x EDITOR "hx"
+else if type -q nvim
     set -x EDITOR "nvim"
 else
     set -x EDITOR "vim"
