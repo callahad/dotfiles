@@ -1,0 +1,5 @@
+[user]
+    email = d.callahan@f5.com
+
+[commit]
+    gpgSign = false

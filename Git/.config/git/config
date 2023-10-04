@@ -46,5 +46,5 @@
     line-numbers-right-style = yellow
 
 # Dayjob config
-[includeIf "gitdir:~/Projects/Suborbital/"]
-    path = ~/.config/git/config-suborbital
+[includeIf "gitdir:~/Projects/F5/"]
+    path = ~/.config/git/config-f5
