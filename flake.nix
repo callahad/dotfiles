@@ -37,8 +37,7 @@
           home.homeDirectory = "/home/dan";
         })
 
-        ./Home-Manager/common.nix
-        ./Home-Manager/linux.nix
+        ./home.nix
       ];
     };
 
@@ -49,9 +48,8 @@
           home.username = "d.callahan";
           home.homeDirectory = "/Users/d.callahan";
         })
-        
-        ./Home-Manager/common.nix
-        ./Home-Manager/macos.nix
+
+        ./home.nix
       ];
     };
   };
