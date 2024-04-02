@@ -6,7 +6,7 @@
     bat
     eza
     fd
-    gitMinimal
+    git
     ripgrep
     tree
     unar

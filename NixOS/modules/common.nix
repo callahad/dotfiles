@@ -37,7 +37,7 @@
     bc
     curl
     file
-    gitMinimal
+    git
     libarchive # bsdtar
     rsync
     tree
