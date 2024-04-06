@@ -32,11 +32,7 @@
     homeConfigurations."dan@impact" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages."x86_64-linux";
       modules = [
-        ({ ... }: {
-          home.username = "dan";
-          home.homeDirectory = "/home/dan";
-        })
-
+        { home.username = "dan"; home.homeDirectory = "/home/dan"; }
         ./home.nix
       ];
     };
@@ -44,11 +40,7 @@
     homeConfigurations."d.callahan@QCF9HHCXM5" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs-darwin.legacyPackages."aarch64-darwin";
       modules = [
-        ({ ... }: {
-          home.username = "d.callahan";
-          home.homeDirectory = "/Users/d.callahan";
-        })
-
+        { home.username = "d.callahan"; home.homeDirectory = "/Users/d.callahan"; }
         ./home.nix
       ];
     };
