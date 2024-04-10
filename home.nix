@@ -47,7 +47,6 @@ let
     pdftk
     qpdf
     qrencode
-    xclip
     yt-dlp
   ];
 
@@ -147,4 +146,63 @@ in
   home.sessionVariables."HISTFILE" = "~/.local/state/bash/history";
   home.file.".local/state/bash/.keep".text = "";
   home.file.".local/share/tig/.keep".text = "";
+
+  # Plasma (via Plasma Manager)
+  programs.plasma = {
+    enable = true;
+
+    workspace.clickItemTo = "select"; # Plasma 6 default, but not Plasma-Manager
+
+    shortcuts = {
+      "services/kitty.desktop"."_launch" = [ "Meta+Return" ];
+
+      "plasmashell"."manage activities" = [ ];
+
+      "plasmashell"."activate task manager entry 1" = [ ];
+      "plasmashell"."activate task manager entry 2" = [ ];
+      "plasmashell"."activate task manager entry 3" = [ ];
+      "plasmashell"."activate task manager entry 4" = [ ];
+      "plasmashell"."activate task manager entry 5" = [ ];
+      "plasmashell"."activate task manager entry 6" = [ ];
+      "plasmashell"."activate task manager entry 7" = [ ];
+      "plasmashell"."activate task manager entry 8" = [ ];
+      "plasmashell"."activate task manager entry 9" = [ ];
+      "plasmashell"."activate task manager entry 10" = [ ];
+
+      "kwin"."Switch to Desktop 1" = "Meta+1";
+      "kwin"."Switch to Desktop 2" = "Meta+2";
+      "kwin"."Switch to Desktop 3" = "Meta+3";
+      "kwin"."Switch to Desktop 4" = "Meta+4";
+      "kwin"."Switch to Desktop 5" = "Meta+5";
+      "kwin"."Switch to Desktop 6" = "Meta+6";
+      "kwin"."Switch to Desktop 7" = "Meta+7";
+      "kwin"."Switch to Desktop 8" = "Meta+8";
+      "kwin"."Switch to Desktop 9" = "Meta+9";
+      "kwin"."Switch to Desktop 10" = "Meta+0";
+
+      "kwin"."Window to Desktop 1" = "Meta+!"; # ! -> Shift+1
+      "kwin"."Window to Desktop 2" = "Meta+@"; # @ -> Shift+2
+      "kwin"."Window to Desktop 3" = "Meta+#"; # ...
+      "kwin"."Window to Desktop 4" = "Meta+$";
+      "kwin"."Window to Desktop 5" = "Meta+%";
+      "kwin"."Window to Desktop 6" = "Meta+^";
+      "kwin"."Window to Desktop 7" = "Meta+&";
+      "kwin"."Window to Desktop 8" = "Meta+*";
+      "kwin"."Window to Desktop 9" = "Meta+(";
+      "kwin"."Window to Desktop 10" = "Meta+)";
+
+      "kwin"."Window Move Center" = "Meta+c";
+      "kwin"."Window Maximize" = "Meta+Up";
+      "kwin"."Window Minimize" = "Meta+Down";
+      "kwin"."Window Quick Tile Top" = [ ];
+      "kwin"."Window Quick Tile Bottom" = [ ];
+    };
+
+    configFile = {
+      "kcminputrc"."[Libinput][2362][628][PIXA3854:00 093A:0274 Touchpad]" = {
+        "NaturalScroll".value = true;
+        "ClickMethod".value = 2; # Right click by pressing with 2 fingers
+      };
+    };
+  };
 }

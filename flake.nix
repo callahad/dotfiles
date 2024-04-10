@@ -8,9 +8,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    plasma-manager = {
+      url = "github:pjones/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-darwin, home-manager }: {
+  outputs = { self, nixpkgs, nixpkgs-darwin, home-manager, plasma-manager }: {
     nixosConfigurations."impact" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -34,6 +39,7 @@
       modules = [
         { home.username = "dan"; home.homeDirectory = "/home/dan"; }
         ./home.nix
+        plasma-manager.homeManagerModules.plasma-manager
       ];
     };
 

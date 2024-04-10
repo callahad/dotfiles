@@ -1,9 +1,7 @@
 { lib, pkgs, ... }:
 
 {
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "libsane-dsseries"
-  ];
+  allowedUnfree = [ "libsane-dsseries" ];
 
   # Software
   services.xserver.enable = true;
@@ -28,6 +26,8 @@
     glxinfo
     vulkan-tools
     wayland-utils
+    wl-clipboard
+    xclip
   ];
 
   # Fonts

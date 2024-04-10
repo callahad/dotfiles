@@ -1,11 +1,15 @@
 { lib, pkgs, ... }:
 
 {
+  imports = [ ./allowedUnfree.nix ];
+
   # System
   time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_US.UTF-8";
   services.xserver.xkb.options = "ctrl:nocaps";
   console.useXkbConfig = true;
+
+  services.fwupd.enable = true;
 
   # Nix
   # Version 2.21 has nice ergonomic improvements

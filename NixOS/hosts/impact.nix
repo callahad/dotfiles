@@ -9,6 +9,7 @@
     ../modules/common.nix
     ../modules/desktop.nix
     ../modules/desktop-plasma.nix
+    ../modules/gaming.nix
   ];
 
   # Disks

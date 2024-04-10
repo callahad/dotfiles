@@ -10,7 +10,7 @@
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelParams = [ "amdgpu.sg_display=0" ]; # Try if extrnal display flickers
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  # boot.initrd.kernelModules = [ "amdgpu" ]; # No clear advantage / disadvantage to loading early
   boot.initrd.availableKernelModules = [ "nvme" "sd_mod" "thunderbolt" "usb_storage" "usbhid" "xhci_pci" ];
   boot.kernelModules = [ "kvm-amd" ];
 
