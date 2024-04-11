@@ -9,8 +9,11 @@
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  # boot.kernelParams = [ "amdgpu.sg_display=0" ]; # Try if extrnal display flickers
-  # boot.initrd.kernelModules = [ "amdgpu" ]; # No clear advantage / disadvantage to loading early
+  boot.kernelParams = [
+    # "hib_compression=lz4" # Only in kernel >= 6.9
+    # "amdgpu.sg_display=0" # Try if external display flickers
+  ];
+  # boot.initrd.kernelModules = [ "amdgpu" ]; # No clear advantage to loading early
   boot.initrd.availableKernelModules = [ "nvme" "sd_mod" "thunderbolt" "usb_storage" "usbhid" "xhci_pci" ];
   boot.kernelModules = [ "kvm-amd" ];
 
@@ -19,6 +22,7 @@
   hardware.cpu.amd.updateMicrocode = true;
 
   # Hardware
+  hardware.bluetooth.enable = true;
   services.fprintd.enable = true;
   services.power-profiles-daemon.enable = true;
   services.hardware.bolt.enable = true;

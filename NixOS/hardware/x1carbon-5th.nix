@@ -22,9 +22,18 @@
   hardware.cpu.intel.updateMicrocode = true;
 
   # Hardware
+  hardware.bluetooth.enable = true;
+  services.hardware.bolt.enable = true;
   #services.tlp.enable = true;
   services.thermald.enable = true;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire.enable = true;
+  services.pipewire.alsa = { enable = true; support32Bit = true; };
+  services.pipewire.pulse.enable = true;
 
   # Acceleration
   environment.variables = { VDPAU_DRIVER = "va_gl"; };

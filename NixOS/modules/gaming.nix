@@ -5,7 +5,7 @@
 
   programs.steam.enable = true;
   programs.gamescope.enable = true;
-  programs.gamescope.capSysNice = true;
+  # programs.gamescope.capSysNice = true;
   # programs.steam.extest.enable = true;
   # programs.steam.extraCompatPackages = [ pkgs.proton-ge-bin ];
   # programs.steam.remotePlay.openFirewall = true;

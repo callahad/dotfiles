@@ -154,10 +154,10 @@ in
     workspace.clickItemTo = "select"; # Plasma 6 default, but not Plasma-Manager
 
     shortcuts = {
-      "services/kitty.desktop"."_launch" = [ "Meta+Return" ];
-
+      # Unset conflicting defaults
+      "kwin"."Window Quick Tile Top" = [ ];
+      "kwin"."Window Quick Tile Bottom" = [ ];
       "plasmashell"."manage activities" = [ ];
-
       "plasmashell"."activate task manager entry 1" = [ ];
       "plasmashell"."activate task manager entry 2" = [ ];
       "plasmashell"."activate task manager entry 3" = [ ];
@@ -167,8 +167,8 @@ in
       "plasmashell"."activate task manager entry 7" = [ ];
       "plasmashell"."activate task manager entry 8" = [ ];
       "plasmashell"."activate task manager entry 9" = [ ];
-      "plasmashell"."activate task manager entry 10" = [ ];
 
+      # Set preferred hotkeys
       "kwin"."Switch to Desktop 1" = "Meta+1";
       "kwin"."Switch to Desktop 2" = "Meta+2";
       "kwin"."Switch to Desktop 3" = "Meta+3";
@@ -178,7 +178,6 @@ in
       "kwin"."Switch to Desktop 7" = "Meta+7";
       "kwin"."Switch to Desktop 8" = "Meta+8";
       "kwin"."Switch to Desktop 9" = "Meta+9";
-      "kwin"."Switch to Desktop 10" = "Meta+0";
 
       "kwin"."Window to Desktop 1" = "Meta+!"; # ! -> Shift+1
       "kwin"."Window to Desktop 2" = "Meta+@"; # @ -> Shift+2
@@ -189,20 +188,33 @@ in
       "kwin"."Window to Desktop 7" = "Meta+&";
       "kwin"."Window to Desktop 8" = "Meta+*";
       "kwin"."Window to Desktop 9" = "Meta+(";
-      "kwin"."Window to Desktop 10" = "Meta+)";
 
       "kwin"."Window Move Center" = "Meta+c";
       "kwin"."Window Maximize" = "Meta+Up";
       "kwin"."Window Minimize" = "Meta+Down";
-      "kwin"."Window Quick Tile Top" = [ ];
-      "kwin"."Window Quick Tile Bottom" = [ ];
+
+      "services/kitty.desktop"."_launch" = [ "Meta+Return" ];
     };
 
     configFile = {
+      "dolphinrc".General"."RememberOpenedTabs".value = false;
+      "dolphinrc".General"."ShowZoomSlider".value = false;
+      "klipperrc"."General"."KeepClipboardContents".value = false;
+      "systemsettingsrc"."systemsettings_sidebar_mode"."HighlightNonDefaultSettings".value = true;
+
+      "kwinrc"."NightColor"."Active".value = true;
+      "kwinrc"."NightColor"."LatitudeAuto".value = 55;
+      "kwinrc"."NightColor"."LatitudeFixed".value = 55;
+      "kwinrc"."NightColor"."LongitudeAuto".value = "-6";
+      "kwinrc"."NightColor"."LongitudeFixed".value = "-6";
+      "kwinrc"."NightColor"."Mode".value = "Location";
+
       "kcminputrc"."[Libinput][2362][628][PIXA3854:00 093A:0274 Touchpad]" = {
         "NaturalScroll".value = true;
         "ClickMethod".value = 2; # Right click by pressing with 2 fingers
       };
     };
+
+    # TODO: Convert my panel setup to Plasma Manager?
   };
 }
