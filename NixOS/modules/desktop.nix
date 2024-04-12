@@ -37,6 +37,8 @@
     dejavu_fonts
     iosevka-bin
     noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
     noto-fonts-color-emoji
   ];
 
