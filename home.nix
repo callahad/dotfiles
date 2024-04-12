@@ -197,8 +197,8 @@ in
     };
 
     configFile = {
-      "dolphinrc".General"."RememberOpenedTabs".value = false;
-      "dolphinrc".General"."ShowZoomSlider".value = false;
+      "dolphinrc"."General"."RememberOpenedTabs".value = false;
+      "dolphinrc"."General"."ShowZoomSlider".value = false;
       "klipperrc"."General"."KeepClipboardContents".value = false;
       "systemsettingsrc"."systemsettings_sidebar_mode"."HighlightNonDefaultSettings".value = true;
 

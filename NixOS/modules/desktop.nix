@@ -36,6 +36,7 @@
   fonts.packages = with pkgs; [
     dejavu_fonts
     iosevka-bin
+    noto-fonts
     noto-fonts-color-emoji
   ];
 
