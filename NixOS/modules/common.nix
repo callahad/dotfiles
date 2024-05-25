@@ -12,8 +12,9 @@
   services.fwupd.enable = true;
 
   # Nix
-  # Version 2.21 has nice ergonomic improvements
-  nix.package = if (lib.versionAtLeast pkgs.nix.version "2.21") then pkgs.nix else pkgs.nixVersions.nix_2_21;
+  # Version 2.22 fixes adding symlinks to the store
+  # ...this is handy for editable Home-Manager configs
+  nix.package = if (lib.versionAtLeast pkgs.nix.version "2.22") then pkgs.nix else pkgs.nixVersions.nix_2_22;
 
   nix.settings.experimental-features = [ "flakes" "nix-command" ];
   nix.settings.auto-optimise-store = true;

@@ -131,15 +131,16 @@ in
   home.sessionVariables."WINEDLLOVERRIDES" = "winemenubuilder.exe=d";
 
   # Dotfiles
-  # NOTE: In many cases, I'd prefer lib.file.mkOutOfStoreSymlink
+  # NOTE: Consider using lib.file.mkOutOfStoreSymlink instead of paths
+  # Using a raw path copies the contents into the read-only Nix store
+  # Using mkOutOfStoreSymlink keeps the source files writable
   # https://github.com/nix-community/home-manager/issues/4692
   xdg.configFile."git".source = ./git;
   xdg.configFile."helix".source = ./helix;
   xdg.configFile."kitty".source = ./kitty;
   xdg.configFile."fish" = { source = ./fish-prompt-metro; recursive = true; };
 
-  home.activation."customActivation" = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
-  '';
+  xdg.configFile."home-manager".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Dotfiles";
 
   # XDG-ification
   # See: https://wiki.archlinux.org/index.php/XDG_Base_Directory
@@ -214,7 +215,5 @@ in
         "ClickMethod".value = 2; # Right click by pressing with 2 fingers
       };
     };
-
-    # TODO: Convert my panel setup to Plasma Manager?
   };
 }
