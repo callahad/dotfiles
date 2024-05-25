@@ -30,7 +30,7 @@ let
     nsxiv
     obsidian
     peek
-    quodlibet-full
+    # quodlibet-full
     rapid-photo-downloader
     simple-scan
     vlc

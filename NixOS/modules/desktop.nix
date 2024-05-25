@@ -9,6 +9,9 @@
 
   services.flatpak.enable = true;
 
+  virtualisation.podman.enable = true;
+  virtualisation.podman.dockerCompat = true;
+
   environment.variables = {
     # Disable Firefox 67's profile-per-install feature (breaks on NixOS)
     #   https://github.com/mozilla/nixpkgs-mozilla/issues/163
