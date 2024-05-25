@@ -33,4 +33,9 @@
   swapDevices = [
     { device = "/dev/disk/by-uuid/60ce858a-d0b5-4680-926a-5d37d6eb4886"; }
   ];
+
+  # Just in case bcachefs breaks itself
+  specialisation."fsck".configuration = {
+    fileSystems."/".options = [ "fsck" "fix_errors" ];
+  };
 }
