@@ -36,4 +36,17 @@
     framework-tool
     nvtopPackages.amd
   ];
+
+  # Flag keyboard as internal so "disable touchpad when typing" works
+  # Included in libinput after 1.25.0
+  environment.etc."libinput/local-overrides.quirks" =
+    lib.mkIf (lib.versionOlder pkgs.libinput.version "1.26")
+    { text = ''
+        [Framework Laptop 16 Keyboard Module]
+        MatchName=Framework Laptop 16 Keyboard Module*
+        MatchUdevType=keyboard
+        MatchDMIModalias=dmi:*svnFramework:pnLaptop16*
+        AttrKeyboardIntegration=internal
+      '';
+    };
 }
