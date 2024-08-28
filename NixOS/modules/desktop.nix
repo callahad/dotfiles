@@ -13,10 +13,6 @@
   virtualisation.podman.dockerCompat = true;
 
   environment.variables = {
-    # Disable Firefox 67's profile-per-install feature (breaks on NixOS)
-    #   https://github.com/mozilla/nixpkgs-mozilla/issues/163
-    MOZ_LEGACY_PROFILES = "1";
-
     # Make Firefox scroll better in Xorg
     MOZ_USE_XINPUT2 = "1";
 
