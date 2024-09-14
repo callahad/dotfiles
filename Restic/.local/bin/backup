@@ -1,9 +1,0 @@
-#!/bin/sh
-
-export RESTIC_REPOSITORY='sftp:dan@192.168.1.4:restic-dan-neutraface'
-
-# Note: --exclude-caches follows http://bford.info/cachedir/spec.html
-# To mark a directory for exclusion, create a `CACHEDIR.TAG` file in it with:
-#     echo "Signature: 8a477f597d28d172789f06886806bc55" > CACHEDIR.TAG
-
-restic backup --one-file-system --exclude-caches --exclude-file ~/.config/restic/exclude ~
