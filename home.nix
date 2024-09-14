@@ -15,6 +15,7 @@ let
   linuxPackages = with pkgs; [
     # GUI Applications
     calibre
+    celluloid
     deluge
     digikam
     gimp
@@ -43,6 +44,7 @@ let
     dua
     ffmpeg-full
     highlight
+    ncdu
     oathToolkit
     pdftk
     qpdf
