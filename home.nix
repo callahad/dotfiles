@@ -156,7 +156,7 @@ in
 
   # Plasma (via Plasma Manager)
   programs.plasma = {
-    enable = true;
+    enable = false;
 
     workspace.clickItemTo = "select"; # Plasma 6 default, but not Plasma-Manager
 
