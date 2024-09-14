@@ -4,19 +4,19 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  environment.gnome.excludePackages = with pkgs.gnome; [
+  environment.gnome.excludePackages = with pkgs; [
     epiphany
     geary
+    gnome-connections
     gnome-logs
     gnome-maps
     gnome-music
-    pkgs.gnome-connections
-    pkgs.gnome-photos
-    pkgs.gnome-tour
-    pkgs.orca
+    gnome-photos
+    gnome-tour
+    orca
   ];
 
-  environment.systemPackages = with pkgs.gnome; [
+  environment.systemPackages = with pkgs; [
     dconf-editor
     gnome-tweaks
   ];

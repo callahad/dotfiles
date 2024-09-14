@@ -24,7 +24,6 @@
   services.power-profiles-daemon.enable = true;
   services.hardware.bolt.enable = true;
 
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire.enable = true;
