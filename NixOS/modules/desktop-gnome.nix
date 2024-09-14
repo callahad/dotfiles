@@ -4,6 +4,12 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  services.xserver.desktopManager.gnome.extraGSettingsOverridePackages = [ pkgs.gnome.mutter ];
+  services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
+    [org.gnome.mutter]
+    experimental-features=['variable-refresh-rate', 'scale-monitor-framebuffer']
+  '';
+
   environment.gnome.excludePackages = with pkgs; [
     epiphany
     geary
@@ -19,5 +25,10 @@
   environment.systemPackages = with pkgs; [
     dconf-editor
     gnome-tweaks
-  ];
+  ] ++ (with pkgs.gnomeExtensions; [
+    appindicator
+    caffeine
+    gtk4-desktop-icons-ng-ding
+    syncthing-indicator
+  ]);
 }

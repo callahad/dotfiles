@@ -8,7 +8,7 @@
     ../modules/users.nix
     ../modules/common.nix
     ../modules/desktop.nix
-    ../modules/desktop-plasma.nix
+    ../modules/desktop-gnome.nix
     ../modules/gaming.nix
   ];
 
