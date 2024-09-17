@@ -12,6 +12,15 @@
     ../modules/gaming.nix
   ];
 
+  # Suspend, then hibernate 2 hours after lid close
+  # The default is to wait until 5% battery to hibernate, but my laptop never
+  # wakes to check the battery level, so it dies. We can work around that by
+  # setting an explicit HibernateDelaySec timeout instead.
+  services.logind.lidSwitch = "suspend-then-hibernate";
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=2h
+  '';
+
   # Disks
   boot.supportedFilesystems = [ "bcachefs" ];
   # Note: No need for fstrim on bcachefs as "we discard buckets as soon as they become empty"
