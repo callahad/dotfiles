@@ -16,10 +16,11 @@
   # The default is to wait until 5% battery to hibernate, but my laptop never
   # wakes to check the battery level, so it dies. We can work around that by
   # setting an explicit HibernateDelaySec timeout instead.
-  services.logind.lidSwitch = "suspend-then-hibernate";
-  systemd.sleep.extraConfig = ''
-    HibernateDelaySec=2h
-  '';
+  # Note: Temporarily disabled because resumption seems broken on 6.11
+  # services.logind.lidSwitch = "suspend-then-hibernate";
+  # systemd.sleep.extraConfig = ''
+    # HibernateDelaySec=2h
+  # '';
 
   # Disks
   boot.supportedFilesystems = [ "bcachefs" ];

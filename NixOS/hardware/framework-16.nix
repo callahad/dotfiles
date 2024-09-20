@@ -9,7 +9,8 @@
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = [ "hibernate.compressor=lz4" ];
+  # Note: Hibernation seems unreliable with 6.11.0
+  # boot.kernelParams = [ "hibernate.compressor=lz4" ]; # Note: Also add "lz4" to initrd.kernelModules
   # boot.initrd.kernelModules = [ "amdgpu" ]; # No clear advantage to loading early
   boot.initrd.availableKernelModules = [ "nvme" "sd_mod" "thunderbolt" "usb_storage" "usbhid" "xhci_pci" ];
   boot.kernelModules = [ "kvm-amd" ];
