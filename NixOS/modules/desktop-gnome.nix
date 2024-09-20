@@ -28,7 +28,9 @@
   ] ++ (with pkgs.gnomeExtensions; [
     appindicator
     caffeine
+    dash-to-panel
     gtk4-desktop-icons-ng-ding
     syncthing-indicator
+    # window-list
   ]);
 }
