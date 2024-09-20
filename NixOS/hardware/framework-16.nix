@@ -9,7 +9,7 @@
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = [ "hib_compression=lz4" ];
+  boot.kernelParams = [ "hibernate.compressor=lz4" ];
   # boot.initrd.kernelModules = [ "amdgpu" ]; # No clear advantage to loading early
   boot.initrd.availableKernelModules = [ "nvme" "sd_mod" "thunderbolt" "usb_storage" "usbhid" "xhci_pci" ];
   boot.kernelModules = [ "kvm-amd" ];
