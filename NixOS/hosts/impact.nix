@@ -47,5 +47,12 @@
   # Just in case bcachefs breaks itself
   specialisation."fsck".configuration = {
     fileSystems."/".options = [ "fsck" "fix_errors" ];
+    boot.consoleLogLevel = 8;
+    boot.kernelParams = [ "no_console_suspend=1" ];
+  };
+
+  specialisation."verbose".configuration = {
+    boot.consoleLogLevel = 8;
+    boot.kernelParams = [ "no_console_suspend=1" ];
   };
 }
