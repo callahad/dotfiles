@@ -14,7 +14,7 @@ let
 
   linuxPackages = with pkgs; [
     # GUI Applications
-    calibre
+    # calibre
     celluloid
     deluge
     digikam
