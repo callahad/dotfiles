@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 
 {
-  allowedUnfree = [ "steam" "steam-original" "steam-run" ];
+  allowedUnfree = [ "steam" "steam-unwrapped" ];
 
   programs.steam.enable = true;
   programs.gamescope.enable = true;
