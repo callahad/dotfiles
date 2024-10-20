@@ -8,10 +8,17 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  # Note: Hibernation seems unreliable with 6.11.0
-  # boot.kernelParams = [ "hibernate.compressor=lz4" ]; # Note: Also add "lz4" to initrd.kernelModules
-  # boot.initrd.kernelModules = [ "amdgpu" ]; # No clear advantage to loading early
+  boot.kernelPackages = pkgs.linuxPackages_testing;
+  # Note: Hibernation is broken in 6.11.0 - 6.12-rc3 if bluetooth is enabled
+  environment.etc."systemd/system-sleep/pre-hibernate-rfkill-bluetooth.sh".source =
+    pkgs.writeShellScript "pre-hibernate-rfkill-bluetooth.sh" ''
+      if [ "$1-$SYSTEMD_SLEEP_ACTION" = "pre-hibernate" ]; then
+        ${pkgs.util-linux}/bin/rfkill block bluetooth
+      fi
+    '';
+
+  boot.kernelParams = [ "hibernate.compressor=lz4" ]; # Note: Also add "lz4" to initrd.kernelModules
+  boot.initrd.kernelModules = [ "lz4" ];
   boot.initrd.availableKernelModules = [ "nvme" "sd_mod" "thunderbolt" "usb_storage" "usbhid" "xhci_pci" ];
   boot.kernelModules = [ "kvm-amd" ];
 
