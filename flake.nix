@@ -16,6 +16,18 @@
   };
 
   outputs = { self, nixpkgs, nixpkgs-darwin, home-manager, plasma-manager }: {
+    nixosConfigurations."bcachefsInstaller" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix"
+        ({lib, pkgs, ...}: {
+          boot.supportedFilesystems."bcachefs" = lib.mkForce true;
+          boot.supportedFilesystems."zfs" = lib.mkForce false;
+          boot.kernelPackages = lib.mkOverride 0 pkgs.linuxPackages_latest;
+        })
+      ];
+    };
+
     nixosConfigurations."impact" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
