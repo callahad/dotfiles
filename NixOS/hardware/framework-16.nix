@@ -9,6 +9,11 @@
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_testing;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Fixes hibernation, but Bluetooth is a little broken afterwards?
+  # boot.kernelPatches = [
+    # { name = "mt7921-fix"; patch = ../btmtk.patch; }
+  # ];
   # Note: Hibernation is broken in 6.11.0 - 6.12-rc3 if bluetooth is enabled
   environment.etc."systemd/system-sleep/pre-hibernate-rfkill-bluetooth.sh".source =
     pkgs.writeShellScript "pre-hibernate-rfkill-bluetooth.sh" ''

@@ -53,5 +53,6 @@
   specialisation."verbose".configuration = {
     boot.consoleLogLevel = 8;
     boot.kernelParams = [ "no_console_suspend=1" ];
+    boot.kernel.sysctl = { "kernel.sysrq" = 1; };
   };
 }
